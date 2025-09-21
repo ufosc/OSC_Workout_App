@@ -5,12 +5,12 @@ If you like exercising but don’t want to pay the $3 a month that top-tier work
 
 ## Get started
 
-# 1. Move into the project folder
+### 1. Move into the project folder
 cd OSC_Workout_App/app
 
-# 2. Install dependencies
+### 2. Install dependencies
 npm install
 
-# 3. Start the development server
+### 3. Start the development server
 npm start
 
