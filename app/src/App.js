@@ -1,10 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import SearchBar from './components/SearchBar.js'
 
 function App() {
+  const [searchValue, setSearchValue] = React.useState("");
   return (
     <div className="App">
+
+      {/* Search Bar Implementation */}
+      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      <p>Search Results: {searchValue}</p>
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
