@@ -1,5 +1,10 @@
+body{
+  background-color: #f1f1f1;
+}
+
 .App {
   text-align: center;
+  justify-content: column;
 }
 
 .App-logo {
@@ -14,7 +19,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +40,75 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.header-container{
+  /* background-color: rgb(180, 222, 189); */
+  font-size: 25px;
+  font-family: 'Trebuchet MS';
+    /* margin: 20px; */
+  border-radius: 10px;
+  margin: 20px;
+  flex: display;
+}
+
+.title-box{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: wheat; */
+}
+
+.title-box input{
+  height: 50px;
+  width: 500px; 
+}
+
+.nav-box{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  /* background-color: burlywood; */
+}
+
+.nav-box a{
+  background-color: rgb(218, 219, 221);
+  padding: 10px;
+  font-size: 25px;
+  border-radius: 10px;
+  flex: 1;
+  font-family:'Trebuchet MS', sans-serif 
+}
+
+.content-container{
+  /* column-gap: 2cap; */
+  margin: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.content-photo{
+  background-color: rgb(205, 191, 188);
+  height: 300px;
+  width: 40vw;
+}
+
+.content-box{
+  background-color: rgb(180, 222, 189);
+  height: 300px;
+  width: 60vw;
+}
+
+.more-content-container{
+  justify-content: center;
+  background-color: rgb(173, 156, 173);
+  margin: 20px;
+  height: 500px;
+}
+
+.more-content-container a{
+  height: 100px;
+  width: 600px;
+  background-color: yellow;
 }
