@@ -1,32 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
-import SearchBar from './components/SearchBar.js'
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+import Home from './Pages/Home';
 
 function App() {
-  const [searchValue, setSearchValue] = React.useState("");
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
+        <nav >
+          <NavLink 
+            to="/">
+            Home
+          </NavLink>
+          <NavLink 
+            to="/login" 
 
-      {/* Search Bar Implementation */}
-      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-      <p>Search Results: {searchValue}</p>
+          >
+            Login
+          </NavLink>
+          <NavLink 
+            to="/signup" 
+          >
+            Signup
+          </NavLink>
+        </nav>
 
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <div>
+          <h1>Workout App</h1>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
