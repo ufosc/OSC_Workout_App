@@ -27,7 +27,6 @@ function App() {
         </nav>
 
         <div>
-          <h1>Workout App</h1>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
