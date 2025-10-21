@@ -19,6 +19,7 @@ const backups = [
 function Brainrot() {
     const[shortIDs, setShortIDs] = useState([]);    // Short video ID from Youtube for identification
 
+
     useEffect(() => {
         setShortIDs([]);
         const fetchShorts = async () => {
@@ -57,8 +58,8 @@ function Brainrot() {
                 {shortIDs.map((id) => (
                     <SwiperSlide key={id}>
                         <iframe
-                            width="500"
-                            height="700"
+                            width="450"
+                            height="650"
                             src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}`}
                             allowFullScreen
                         />
