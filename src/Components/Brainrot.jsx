@@ -12,7 +12,11 @@ const SEARCH_QUERY = "brainrot shorts";                 // Search query for yout
 const backups = [
     "cCT3xvpsdBQ",
     "Ayy8vG9EMFY",
-    "CwawqpDLidQ"
+    "CwawqpDLidQ",
+    "NDt1nOZan9s",
+    "V0sB9sGhwJw",
+    "92lWmYOTWKQ",
+    "NWoyK6LrZXI"
 ]
 
 // Main Brainrot API Function
