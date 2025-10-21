@@ -5,8 +5,9 @@ import 'swiper/css';
 import 'swiper/css/mousewheel';
 import 'swiper/css/pagination';
 
-const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;  // API Key from .env file
-const SEARCH_QUERY = "brainrot shorts";                 // Search query for youtube search. Can change to anything.
+//const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;    // API Key from .env file. Uncomment if you have it.
+const API_KEY="fakekeyfornow"                               // Placeholder API Key for testing. Keep if you don't have .env
+const SEARCH_QUERY = "brainrot shorts";                     // Search query for youtube search. Can change to anything.
 
 // Backup Brainrot Shorts (Video IDs)
 const backups = [
