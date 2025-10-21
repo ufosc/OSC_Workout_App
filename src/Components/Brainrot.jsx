@@ -57,6 +57,7 @@ function Brainrot() {
                 slidesPerView={1}
                 style={{ height: '700px', width: '500px'}}
                 pagination={{ clickable: true}}
+                mousewheel={true}
                 modules={[Mousewheel, Pagination]}
                 >
                 {shortIDs.map((id) => (
