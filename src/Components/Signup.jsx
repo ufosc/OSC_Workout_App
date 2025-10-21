@@ -1,10 +1,13 @@
 
+import React from 'react';
+import '../Pages/Home.css';
 
-function Signup() {
-    return(
-        
-        <p>signup component for people </p>
-
+function Signup({ onBegin }) {
+    return (
+        <div className="auth-root">
+            <h2>Signup</h2>
+            <p>signup component for people </p>
+        </div>
     );
 }
 

@@ -1,10 +1,14 @@
 
 
+import React from 'react';
+import '../Pages/Home.css';
 
-function Login() {
-    return(
-        <p>Login component for people</p>
-
+function Login({ onBegin }) {
+    return (
+        <div className="auth-root">
+            <h2>Login</h2>
+            <p>Login component for people</p>
+        </div>
     );
 }
 
