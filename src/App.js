@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-do
 import './App.css';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import Brainrot from "./Components/Brainrot";
 import Home from './Pages/Home';
 
 function App() {
@@ -24,6 +25,11 @@ function App() {
           >
             Signup
           </NavLink>
+          <NavLink 
+            to="/brainrot" 
+          >
+            Brainrot
+          </NavLink>
         </nav>
 
         <div>
@@ -31,6 +37,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/brainrot" element={<Brainrot />} />
           </Routes>
         </div>
       </div>
