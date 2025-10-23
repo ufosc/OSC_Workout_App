@@ -7,7 +7,16 @@ import 'swiper/css/pagination';
 
 //const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;    // API Key from .env file. Uncomment if you have it.
 const API_KEY="fakekeyfornow"                               // Placeholder API Key for testing. Keep if you don't have .env
-const SEARCH_QUERY = "brainrot shorts";                     // Search query for youtube search. Can change to anything.
+
+// List of youtube search queries
+let SEARCH_QUERIES = ["brainrot shorts", "satisfying shorts", "subway surfers brainrot", "roblox brainrot",
+    "top ten cat moments shorts", "skibidi sigma rizz ohio", "AI brainrot shorts", "brainrot shorts with ai voice",
+    "funny shorts", "brainrot top 10 shorts", "gen alpha humor shorts", "tiktok shorts", "instagram reels shorts",
+    "funny videos from discord shorts", "funny shorts that used to be vines", "low effort brainrot shorts"]
+
+// Randomly selects a search query in order to add shorts variety
+let SEARCH_QUERY = SEARCH_QUERIES[Math.floor(Math.random() * SEARCH_QUERIES.length)];
+
 
 // Backup Brainrot Shorts (Video IDs)
 const backups = [
