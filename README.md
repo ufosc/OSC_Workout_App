@@ -55,3 +55,6 @@ To launch, simply run the following command:
 ```sh
    npm start
 ```
+
+For current website deployment you can follow the below link to check it out
+[delpoyed Site](https://ufosc.github.io/OSC_Workout_App) 
