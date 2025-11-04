@@ -55,6 +55,38 @@ To launch, simply run the following command:
 ```sh
    npm start
 ```
+### 5. Generate a Youtube Data API Key
+The Youtube Data API is used to fetch short videos directly from Youtube. Without an API key, the app will cycle through the same few videos. To generate a key:
+
+1. Ensure that you have an existing Google account. If not, then take the time to create one.
+2. Visit the [Google Cloud Console](https://console.cloud.google.com/)
+3. Create a Project: Click on "Select a Project" at the top of the page -> "New Project"
+4. Once a project has been created, go to the top left corner of the screen and open the drop down menu.
+   Scroll down to "Products" -> "APIs and Services" -> "Enabled APIs & services"
+5. At the top of the page, select "Enable APIs and Services" and search for "Youtube Data API v3"
+6. Click on the API and select "Enable"
+7. Once enabled, you will be redirected to the API/Service detail screen. At the top right corner, click on "Create credentials" and follow the steps to generate an API key.
+8. Once the key has been generated, go to "Credentials" and locate the newly created key. Select it and click on "Show Key". The following product is your new API key.
+   Optionally, you can apply restrictions as preferred in this section. It is recommended to restrict the API key to Youtube Data API v3.
+### Important: Do not implement your API Key directly into the code!!! 
+### Follow the instructions in the next section to secure your key.
+
+## Securing your API Key
+### API Keys are important credentials that should not be shared freely, especially when it comes to an open-source repository.
+### Remember: NEVER PUSH YOUR API KEY TO THE REPOSITORY!
+
+1. Run the following commands to create a new file named .env:
+   ```sh
+   cd OSC_Workout_App
+   echo REACT_APP_YOUTUBE_API_KEY=YOUR_KEY_GOES_HERE > .env
+   ```
+   This is the file that will be referenced in the code, do not access the API key directly.
+   Remember to replace YOUR_KEY_GOES_HERE with your own API key from step 8 in the previous section.
+3. The .gitignore should already be setup to ignore the .env file, but double check to be safe. Remember, never commit this to a repository.
+4. Within the OSC_Workout_App directory, navigate to src -> Components -> Brainrot
+5. Uncomment line 9 and either delete or comment out line 10.
+
+Congratulations, you have now setup an API key.
 
 For current website deployment you can follow the below link to check it out
-[delpoyed Site](https://ufosc.github.io/OSC_Workout_App) 
+[deployed Site](https://ufosc.github.io/OSC_Workout_App) 
