@@ -6,9 +6,10 @@ import 'swiper/css/mousewheel';
 import 'swiper/css/pagination';
 import SEARCH_QUERIES from '../Data/brainrot-search-queries.json';
 
-const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;    // API Key from .env file. Uncomment if you have it.
-//const API_KEY="fakekeyfornow"                               // Placeholder API Key for testing. Keep if you don't have .env
-
+//const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;        // API Key from .env file. Uncomment if you have it.
+const API_KEY="fakekeyfornow"                                   // Placeholder API Key for testing. Keep if you don't have .env
+                                                                // See README.md for directions.
+                                                                
 // Randomly selects a search query in order to add shorts variety
 let SEARCH_QUERY = SEARCH_QUERIES[Math.floor(Math.random() * SEARCH_QUERIES.length)];
 
