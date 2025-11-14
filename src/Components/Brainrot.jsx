@@ -70,6 +70,7 @@ function Brainrot() {
                             width="450"
                             height="650"
                             src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}`}
+                            title={`Brainrot video ${id}`}
                             allowFullScreen
                         />
                     </SwiperSlide>

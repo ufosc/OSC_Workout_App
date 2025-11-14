@@ -31,20 +31,20 @@ function Home({ onBegin }) {
         <section className="links-panel">
           <h2 className="panel-title">Choices</h2>
           <div className="choices-column">
-            <a className="link-card neon-red small-link" href="#" onClick={(e) => e.preventDefault()}>
+            <button className="link-card neon-red small-link" onClick={() => {/* TODO: Implement previous workout functionality */}}>
               <div className="card-title">Previous Workout</div>
               <div className="card-sub">View stats</div>
-            </a>
+            </button>
 
-            <a className="link-card neon-green small-link" href="#" onClick={(e) => e.preventDefault()}>
+            <button className="link-card neon-green small-link" onClick={() => {/* TODO: Implement aura board functionality */}}>
               <div className="card-title">Aura Board</div>
               <div className="card-sub">See your aura</div>
-            </a>
+            </button>
 
-            <a className="link-card neon-red small-link" href="#" onClick={(e) => e.preventDefault()}>
+            <button className="link-card neon-red small-link" onClick={() => {/* TODO: Implement settings functionality */}}>
               <div className="card-title">Settings</div>
               <div className="card-sub">Adjust app</div>
-            </a>
+            </button>
           </div>
         </section>
       </main>
