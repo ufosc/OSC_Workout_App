@@ -1,7 +1,6 @@
 class Session {
-    constructor(exerciseList = [], timeBetweenExercises = 60, sessionName = null) {
+    constructor(exerciseList = [], sessionName = null) {
         this.exerciseList = exerciseList;  
-        this.timeBetweenExercises = timeBetweenExercises;  
         this.sessionName = sessionName;  
         this.date = new Date();  
         this.startTime = null;
@@ -43,18 +42,7 @@ class Session {
     }
 
     
-    setTimeBetweenExercises(time) {
-        this.timeBetweenExercises = time;
-    }
-
     
-    getTimeBetweenExercises() {
-        return this.timeBetweenExercises;
-    }
-
-    removeTimeBetweenExercises() {
-        this.timeBetweenExercises = 0; 
-    }
 
   
     startSession() {
@@ -126,7 +114,6 @@ class Session {
             endTime: this.endTime ? this.endTime.toLocaleTimeString() : null,
             duration: this.getSessionDuration(),
             totalExercises: this.getTotalExercises(),
-            timeBetweenExercises: this.timeBetweenExercises,
             isCompleted: !this.isActive && this.endTime !== null
         };
     }
@@ -154,7 +141,6 @@ class Session {
             startTime: this.startTime ? this.startTime.toISOString() : null,
             endTime: this.endTime ? this.endTime.toISOString() : null,
             exerciseList: this.exerciseList,
-            timeBetweenExercises: this.timeBetweenExercises,
             currentExerciseIndex: this.currentExerciseIndex,
             isActive: this.isActive
         };
@@ -164,7 +150,7 @@ class Session {
     static fromJSON(jsonData) {
         const session = new Session(
             jsonData.exerciseList,
-            jsonData.timeBetweenExercises,
+      
             jsonData.sessionName
         );
         
