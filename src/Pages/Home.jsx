@@ -10,11 +10,13 @@ function Home({ onBegin }) {
         <p className="neon-subtitle text">Lock in. Gain aura. Save money.</p>
       </header>
 
+    
+
       <main className="home-main">
         {/* Begin Workout - Prominent at the top */}
         <div className="begin-container">
-          <div className="link-card neon-blue begin-card">
-            <div className="card-title text">Begin Workout</div>
+          <div className="link-card button begin-card">
+            <div className="card-title text ">Begin Workout</div>
             <div className="card-sub text">Primary action</div>
             <button
               className="begin-button neon-blue text"
