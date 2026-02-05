@@ -6,18 +6,20 @@ function Home({ onBegin }) {
   return (
     <div className="home-root">
       <header className="home-header">
-        <h1 className="neon-title">OSC's Epic Workout App</h1>
-        <p className="neon-subtitle">Lock in. Gain aura. Save money.</p>
+        <h1 className="neon-title text">OSC's Epic Workout App</h1>
+        <p className="neon-subtitle text">Lock in. Gain aura. Save money.</p>
       </header>
+
+    
 
       <main className="home-main">
         {/* Begin Workout - Prominent at the top */}
         <div className="begin-container">
-          <div className="link-card neon-blue begin-card">
-            <div className="card-title">Begin Workout</div>
-            <div className="card-sub">Primary action</div>
+          <div className="link-card button begin-card">
+            <div className="card-title text ">Begin Workout</div>
+            <div className="card-sub text">Primary action</div>
             <button
-              className="begin-button neon-blue"
+              className="begin-button neon-blue text"
               onClick={() => {
                 if (typeof onBegin === 'function') onBegin();
               }}
@@ -29,27 +31,27 @@ function Home({ onBegin }) {
 
         {/* Choices panel */}
         <section className="links-panel">
-          <h2 className="panel-title">Choices</h2>
+          <h2 className="panel-title text">Choices</h2>
           <div className="choices-column">
             <button className="link-card neon-red small-link" onClick={() => {/* TODO: Implement previous workout functionality */}}>
-              <div className="card-title">Previous Workout</div>
-              <div className="card-sub">View stats</div>
+              <div className="card-title text">Previous Workout</div>
+              <div className="card-sub text">View stats</div>
             </button>
 
             <button className="link-card neon-green small-link" onClick={() => {/* TODO: Implement aura board functionality */}}>
-              <div className="card-title">Aura Board</div>
-              <div className="card-sub">See your aura</div>
+              <div className="card-title text">Aura Board</div>
+              <div className="card-sub text">See your aura</div>
             </button>
 
             <button className="link-card neon-red small-link" onClick={() => {/* TODO: Implement settings functionality */}}>
-              <div className="card-title">Settings</div>
-              <div className="card-sub">Adjust app</div>
+              <div className="card-title text">Settings</div>
+              <div className="card-sub text">Adjust app</div>
             </button>
           </div>
         </section>
       </main>
 
-      <footer className="home-footer">© OSC Workout App</footer>
+      <footer className="home-footer text">© OSC Workout App</footer>
     </div>
   );
 }
