@@ -72,3 +72,66 @@
   .links-grid{ flex-direction:column; align-items:center;  }
   .begin-card{ flex: none; width:100%; margin-left: auto,}
 }
+
+
+/*  OPEN SOURCE CHANGES */
+
+/* home screen style */
+.homeScreen {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 30px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* title style */
+.appTitle {
+  color: #00e0ff;
+  font-size: 28px;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* chart styles */
+.chartFrame {
+  width: 100%;
+  max-width: 400px;
+  border: 2px solid #1e66ff;
+  padding: 12px;
+}
+
+.chartImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* stats box styles */
+.statsCard {
+  width: 100%;
+  max-width: 400px;
+  border: 2px solid #1e66ff;
+  border-radius: 24px;
+  background: #5e5e5e;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  color: black;
+}
+
+.statsCol {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.8;
+}

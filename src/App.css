@@ -26,3 +26,20 @@
     0 0 30px #1CD34D,
     inset 0 0 5px rgba(28, 211, 77, 0.3) !important;
 }
+
+
+.appLayout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageArea {
+  flex: 1;
+  overflow: auto;
+}
+
+body {
+  margin: 0;
+  background: black;
+}

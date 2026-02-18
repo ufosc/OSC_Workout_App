@@ -1,38 +1,18 @@
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import './App.css';
-import Login from './Components/Login';
-import Signup from './Components/Signup';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+
+import Home from "./Pages/Home";
+import Login from "./Components/Login";
+import Signup from "./Components/Signup";
 import Brainrot from "./Components/Brainrot";
-import Home from './Pages/Home';
+import BottomNav from "./Components/BottomNav";
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <nav >
-          <NavLink 
-            to="/">
-            Home
-          </NavLink>
-          <NavLink 
-            to="/login" 
+      <div className="appLayout">
 
-          >
-            Login
-          </NavLink>
-          <NavLink 
-            to="/signup" 
-          >
-            Signup
-          </NavLink>
-          <NavLink 
-            to="/brainrot" 
-          >
-            Brainrot
-          </NavLink>
-        </nav>
-
-        <div>
+        <div className="pageArea">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -40,6 +20,9 @@ function App() {
             <Route path="/brainrot" element={<Brainrot />} />
           </Routes>
         </div>
+
+        <BottomNav />
+
       </div>
     </Router>
   );
