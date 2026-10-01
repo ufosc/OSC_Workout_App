@@ -1,13 +1,53 @@
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import '../Pages/Home.css';
+import { recordLogin, getStreak, getCurrentUser, setCurrentUser, clearCurrentUser } from '../Utils/streak';
 
-function Login({ onBegin }) {
+function Login() {
+    const [user, setUser] = useState(getCurrentUser());
+    const [username, setUsername] = useState('');
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+        const name = username.trim();
+        if (!name) return;
+
+        // logging in records today's entry and bumps the streak
+        recordLogin(name);
+        setCurrentUser(name);
+        setUser(name);
+        setUsername('');
+    };
+
+    const handleLogout = () => {
+        clearCurrentUser();
+        setUser(null);
+    };
+
+    if (user) {
+        const streak = getStreak(user);
+        return (
+            <div className="auth-root">
+                <h2>Welcome, {user}</h2>
+                <p>Login streak: {streak} {streak === 1 ? 'day' : 'days'}</p>
+                <button className="auth-begin-button" onClick={handleLogout}>Log out</button>
+            </div>
+        );
+    }
+
     return (
         <div className="auth-root">
             <h2>Login</h2>
-            <p>Login component for people</p>
+            <form onSubmit={handleLogin}>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
+                />
+                <button className="auth-begin-button" type="submit">Log in</button>
+            </form>
         </div>
     );
 }
