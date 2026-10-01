@@ -1,8 +1,11 @@
 import React from 'react';
 import '../App.css';
 import './Home.css';
+import { useNavigate } from 'react-router-dom';
 
-function Home({ onBegin }) {
+function Home() {
+  const navigate = useNavigate();
+
   return (
     <div className="home-root">
       <header className="home-header">
@@ -20,9 +23,7 @@ function Home({ onBegin }) {
             <div className="card-sub text">Primary action</div>
             <button
               className="begin-button neon-blue text"
-              onClick={() => {
-                if (typeof onBegin === 'function') onBegin();
-              }}
+              onClick={() => navigate('/session')}
             >
               Begin Workout
             </button>

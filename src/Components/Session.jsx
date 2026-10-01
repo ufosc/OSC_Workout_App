@@ -1,12 +1,13 @@
 // current session the user will be working on during their workout, where they will log what exersises and weight they are perorming
+import Timer from "./Timer";
 
-
-
-function Login() {
+function Session() {
     return(
-        <p>workout sessions for users</p>
-
+        <div style={{textAlign: "center", padding:"2rem" }}>
+            <h1>Workout Session</h1>
+            <Timer/>
+        </div>
     );
 }
 
-export default Login;
+export default Session;

@@ -12,6 +12,8 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
   const [duration, setDuration] = useState(initialSeconds);
   const [secondsLeft, setSecondsLeft] = useState(initialSeconds);
   const [isRunning, setIsRunning] = useState(false);
+  const [customTime, setCustomTime] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
   const endTimeRef = useRef(0);
   const onCompleteRef = useRef(onComplete);
 
@@ -34,6 +36,8 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
       if (remaining === 0) {
         clearInterval(id);
         setIsRunning(false);
+        setIsComplete(true);
+
         if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
         if (onCompleteRef.current) onCompleteRef.current();
       }
@@ -43,7 +47,11 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
   }, [isRunning]);
 
   const handleStart = () => {
-    if (secondsLeft === 0) setSecondsLeft(duration);
+    if (secondsLeft === 0) {
+      setSecondsLeft(duration);
+    }
+
+    setIsComplete(false);
     setIsRunning(true);
   };
 
@@ -52,13 +60,35 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
   const handleReset = () => {
     setIsRunning(false);
     setSecondsLeft(duration);
+    setIsComplete(false);
   };
 
   const handlePreset = (seconds) => {
     setIsRunning(false);
     setDuration(seconds);
     setSecondsLeft(seconds);
+    setIsComplete(false);
   };
+
+  function handleCustomTime() {
+    const newTime = Number(customTime);
+
+    if(newTime > 0) {
+      setIsRunning(false);
+      setDuration(newTime);
+      setSecondsLeft(newTime);
+      setIsComplete(false);
+      setCustomTime("");
+    }
+  }
+
+  function addThirtySeconds() {
+    const newTime = secondsLeft + 30;
+
+    setSecondsLeft(newTime);
+    setDuration(newTime);
+    setIsComplete(false);
+  }
 
   return (
     <div style={{ textAlign: "center", padding: "1rem" }}>
@@ -71,6 +101,11 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
       >
         {formatTime(secondsLeft)}
       </div>
+      <progress
+        value={secondsLeft}
+        max={duration}
+        style={{ width: "250px" }}
+      ></progress>
 
       <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
         {PRESETS.map((seconds) => (
@@ -83,6 +118,24 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
             {seconds}s
           </button>
         ))}
+      </div>
+
+      <div style={{ marginTop: "1rem" }}>
+        <input
+          type="number"
+          placeholder="Custom seconds"
+          value={customTime}
+          onChange={(event) => setCustomTime(event.target.value)}
+          min="1"
+          step="1"
+        />
+
+        <button
+          onClick={handleCustomTime}
+          disabled={isRunning}
+        >
+          Set Time
+        </button>
       </div>
 
       <div
@@ -99,7 +152,17 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
           <button onClick={handleStart}>Start</button>
         )}
         <button onClick={handleReset}>Reset</button>
+
+        <button
+          onClick={addThirtySeconds}
+          disabled={isRunning}
+        >
+          +30s
+        </button>
       </div>
+      {isComplete && (
+        <h3>Rest Complete!</h3>
+      )}
     </div>
   );
 }
