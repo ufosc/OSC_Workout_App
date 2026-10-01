@@ -1,13 +1,18 @@
 import React from 'react';
 import '../App.css';
 import './Home.css';
+import { getCurrentUser, getStreak } from '../Utils/streak';
 
 function Home({ onBegin }) {
+  const user = getCurrentUser();
+  const streak = user ? getStreak(user) : 0;
+
   return (
     <div className="home-root">
       <header className="home-header">
         <h1 className="neon-title text">OSC's Epic Workout App</h1>
         <p className="neon-subtitle text">Lock in. Gain aura. Save money.</p>
+        {user && <p className="neon-subtitle text">🔥 {streak} day streak</p>}
       </header>
 
     
