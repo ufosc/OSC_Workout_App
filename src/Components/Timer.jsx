@@ -8,23 +8,42 @@ function formatTime(totalSeconds) {
   return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }
 
+function playTimerDoneSound(soundType) {
+  const soundFiles = {
+    turkishMarch: "/sounds/turkish-march.mp3",
+    chopinTorrent: "/sounds/chopin-torrent.mp3",
+    vivaldiSummer: "/sounds/vivaldi-summer.mp3",
+  };
+
+  const audio = new Audio(`${process.env.PUBLIC_URL}${soundFiles[soundType]}`);
+  audio.volume = 0.65;
+  audio.play().catch(() => {});
+
+  return audio;
+}
+
 export default function Timer({ initialSeconds = 60, onComplete }) {
   const [duration, setDuration] = useState(initialSeconds);
   const [secondsLeft, setSecondsLeft] = useState(initialSeconds);
   const [isRunning, setIsRunning] = useState(false);
   const [customTime, setCustomTime] = useState("");
+  const [soundType, setSoundType] = useState("turkishMarch");
   const [isComplete, setIsComplete] = useState(false);
   const endTimeRef = useRef(0);
   const onCompleteRef = useRef(onComplete);
+  const soundTypeRef = useRef(soundType);
+  const activeAudioRef = useRef(null);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
 
   useEffect(() => {
-    if (!isRunning) return undefined;
+    soundTypeRef.current = soundType;
+  }, [soundType]);
 
-    endTimeRef.current = Date.now() + secondsLeft * 1000;
+  useEffect(() => {
+    if (!isRunning) return undefined;
 
     const id = setInterval(() => {
       const remaining = Math.max(
@@ -39,6 +58,8 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
         setIsComplete(true);
 
         if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+        stopTimerDoneSound();
+        activeAudioRef.current = playTimerDoneSound(soundTypeRef.current);
         if (onCompleteRef.current) onCompleteRef.current();
       }
     }, 250);
@@ -46,18 +67,30 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
     return () => clearInterval(id);
   }, [isRunning]);
 
-  const handleStart = () => {
-    if (secondsLeft === 0) {
-      setSecondsLeft(duration);
-    }
+  const stopTimerDoneSound = () => {
+    if (!activeAudioRef.current) return;
 
+    activeAudioRef.current.pause();
+    activeAudioRef.current.currentTime = 0;
+    activeAudioRef.current = null;
+  };
+
+  const handleStart = () => {
+    stopTimerDoneSound();
+
+    const nextSeconds = secondsLeft === 0 ? duration : secondsLeft;
+
+    endTimeRef.current = Date.now() + nextSeconds * 1000;
+    setSecondsLeft(nextSeconds);
     setIsComplete(false);
     setIsRunning(true);
-  };
+  }
 
   const handlePause = () => setIsRunning(false);
 
   const handleReset = () => {
+    stopTimerDoneSound();
+
     setIsRunning(false);
     setSecondsLeft(duration);
     setIsComplete(false);
@@ -85,8 +118,13 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
   function addThirtySeconds() {
     const newTime = secondsLeft + 30;
 
+    if (isRunning){
+      endTimeRef.current += 30000;
+    }
+
     setSecondsLeft(newTime);
-    setDuration(newTime);
+    setDuration((currentDuration) =>
+      isRunning ? currentDuration + 30 : newTime);
     setIsComplete(false);
   }
 
@@ -138,6 +176,23 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
         </button>
       </div>
 
+      <div style={{ marginTop: "1rem" }}>
+        <label htmlFor="timer-sound" style={{ marginRight: "0.5rem" }}>
+          Finish sound
+        </label>
+
+        <select
+          id="timer-sound"
+          value={soundType}
+          onChange={(event) => setSoundType(event.target.value)}
+          disabled={isRunning}
+        >
+          <option value="turkishMarch">Mozart - Turkish March</option>
+          <option value="chopinTorrent">Chopin - Etude Torrent</option>
+          <option value="vivaldiSummer">Vivaldi - Summer</option>
+        </select>
+      </div>
+
       <div
         style={{
           display: "flex",
@@ -153,15 +208,12 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
         )}
         <button onClick={handleReset}>Reset</button>
 
-        <button
-          onClick={addThirtySeconds}
-          disabled={isRunning}
-        >
+        <button onClick={addThirtySeconds}>
           +30s
         </button>
       </div>
       {isComplete && (
-        <h3>Rest Complete!</h3>
+        <h3>Rest complete. Next set ready.</h3>
       )}
     </div>
   );
