@@ -17,7 +17,7 @@ const MILESTONES = [
 ];
 
 // calendar day in the user's local time, e.g. "2026-10-01"
-function toDayKey(date) {
+export function toDayKey(date) {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${date.getFullYear()}-${month}-${day}`;
