@@ -1,6 +1,17 @@
 // generated list of workouts based on relevance to user, muscle group or frequently used
 import React, {useState, useEffect, useMemo} from 'react';
 
+const MISSING_KEY_MESSAGE = 'Exercise library needs a RapidAPI key. See the README to set one up.';
+const INVALID_KEY_MESSAGE = 'Your RapidAPI key is invalid or not subscribed to ExerciseDB.';
+const RATE_LIMIT_MESSAGE = 'Exercise API request limit reached. Try again later.';
+const GENERIC_ERROR_MESSAGE = "Couldn't load exercises. Check your connection and try again.";
+
+function getErrorMessage(status) {
+  if (status === 401 || status === 403) return INVALID_KEY_MESSAGE;
+  if (status === 429) return RATE_LIMIT_MESSAGE;
+  return GENERIC_ERROR_MESSAGE;
+}
+
 const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,25 +27,33 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
 
   useEffect(() => {
     const fetchExercises = async () => {
+      const apiKey = process.env.REACT_APP_RAPIDAPI_KEY;
+      if (!apiKey || !apiKey.trim()) {
+        setError(MISSING_KEY_MESSAGE);
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         // ExerciseDB API via RapidAPI or local Kaggle dataset JSON
         const response = await fetch('https://exercisedb.p.rapidapi.com/exercises?limit=100', {
           method: 'GET',
           headers: {
-            'X-RapidAPI-Key': process.env.REACT_APP_RAPIDAPI_KEY || '',
+            'X-RapidAPI-Key': apiKey.trim(),
             'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
           },
         });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          setError(getErrorMessage(response.status));
+          return;
         }
 
         const data = await response.json();
         setExercises(data);
       } catch (err) {
-        setError(err.message);
+        setError(GENERIC_ERROR_MESSAGE);
       } finally {
         setLoading(false);
       }
@@ -82,7 +101,7 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   };
 
   if (loading) return <div className="loading-spinner">Loading exercise library...</div>;
-  if (error) return <div className="error-message">Error fetching exercises: {error}</div>;
+  if (error) return <div className="error-message">{error}</div>;
 
   return (
     <div className="workout-list-container">
