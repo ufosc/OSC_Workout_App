@@ -1,16 +1,36 @@
-import React from 'react';
 import '../App.css';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, getStreak } from '../Utils/streak';
-
+import React, {useState, useEffect} from 'react';
 function Home() {
+  const themes = ['dark', 'light', 'colorblind'];
+  const [currTheme, setCurr] = useState(0);
+
   const navigate = useNavigate();
   const user = getCurrentUser();
   const streak = user ? getStreak(user) : 0;
 
+  useEffect(() => {
+    const setTheme = themes[currTheme];
+    document.body.classList.remove('light-mode','colorblind-mode');
+    if (setTheme != 'dark'){
+      document.body.classList.add(`${setTheme}-mode`);
+    }
+  }, [currTheme]);
+
+  const themeTog = () =>{
+    setCurr((prevTheme)=>(prevTheme +1)% themes.length);
+  };
+
+
   return (
     <div className="home-root">
+    <button
+    onClick={themeTog}
+    style={{ padding: '10px 20px',marginBottom: '20px',cursor: 'pointer',borderRadius: '10px'}}
+    >
+    Theme: {themes[currTheme].toUpperCase()}</button>
       <header className="home-header">
         <h1 className="neon-title text">OSC's Epic Workout App</h1>
         <p className="neon-subtitle text">Lock in. Gain aura. Save money.</p>
