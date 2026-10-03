@@ -81,6 +81,42 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
     }
   };
 
+  const handleAddExercise = () => {
+    //logic to add a custom exercise
+    const newExerciseObj = {
+      id: Date.now(),
+      name: "Custom",
+      bodyPart: "Custom",
+      target: "Custom",
+      equipment: "Custom",
+    };
+
+    newExerciseObj.name = prompt ("Enter custom Exercise name: ");
+    newExerciseObj.bodyPart = prompt ("Enter custom Exercise body part: ");
+    newExerciseObj.target = prompt ("Enter custom Exercise target muscle: ");
+    newExerciseObj.equipment = prompt ("Enter custom Exercise equipment: ");
+
+    if (!newExerciseObj.name) {
+      alert("Please enter a valid exercise name.");
+      return;
+    }
+
+    if (!newExerciseObj.bodyPart) {
+      newExerciseObj.bodyPart = "Unknown";
+    }
+
+    if (!newExerciseObj.target) {
+      newExerciseObj.target = "Unknown";
+    }
+
+    if (!newExerciseObj.equipment) {
+      newExerciseObj.equipment = "Unknown";
+    }
+
+    setExercises((prev) => [...prev, newExerciseObj]);
+    handleSelect(newExerciseObj);
+  }
+
   if (loading) return <div className="loading-spinner">Loading exercise library...</div>;
   if (error) return <div className="error-message">Error fetching exercises: {error}</div>;
 
@@ -102,6 +138,7 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
         >
           Frequently Used ({frequentlyUsedIds.length})
         </button>
+
       </div>
 
       {/* Filter and Search Controls */}
@@ -130,6 +167,12 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
       </div>
 
       {/*Exercise Grid Display */}
+      <div className="add-exercise">
+        <button type="button" className="add-button" onClick={handleAddExercise}>
+          Add Custom Exercise
+        </button>
+      </div>
+
       <div className="exercise-grid">
         {filteredExercises.length === 0 ? (
           <p className="no-results">No exercises match your selection.</p>
