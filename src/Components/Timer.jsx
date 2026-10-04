@@ -1,220 +1,95 @@
-import { useState, useEffect, useRef } from "react";
 
-const PRESETS = [30, 60, 90, 120];
 
-function formatTime(totalSeconds) {
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return `${minutes}:${String(seconds).padStart(2, "0")}`;
-}
+import React, { useState, useRef } from "react";
 
-function playTimerDoneSound(soundType) {
-  const soundFiles = {
-    turkishMarch: "/sounds/turkish-march.mp3",
-    chopinTorrent: "/sounds/chopin-torrent.mp3",
-    vivaldiSummer: "/sounds/vivaldi-summer.mp3",
-  };
+const Timer = () => {
+    // We need ref in this, because we are dealing
+    // with JS setInterval to keep track of it and
+    // stop it when needed
+    const Ref = useRef(null);
 
-  const audio = new Audio(`${process.env.PUBLIC_URL}${soundFiles[soundType]}`);
-  audio.volume = 0.65;
-  audio.play().catch(() => {});
+    // The state for our timer
+    const [timer, setTimer] = useState("00:00:00");
 
-  return audio;
-}
+    const getTimeRemaining = (e) => {
+        const total =
+            Date.parse(e) - Date.parse(new Date());
+        const seconds = Math.floor((total / 1000) % 60);
+        const minutes = Math.floor(
+            (total / 1000 / 60) % 60
+        );
+        const hours = Math.floor(
+            (total / 1000 / 60 / 60) % 24
+        );
+        return {
+            total,
+            hours,
+            minutes,
+            seconds,
+        };
+    };
 
-export default function Timer({ initialSeconds = 60, onComplete }) {
-  const [duration, setDuration] = useState(initialSeconds);
-  const [secondsLeft, setSecondsLeft] = useState(initialSeconds);
-  const [isRunning, setIsRunning] = useState(false);
-  const [customTime, setCustomTime] = useState("");
-  const [soundType, setSoundType] = useState("turkishMarch");
-  const [isComplete, setIsComplete] = useState(false);
-  const endTimeRef = useRef(0);
-  const onCompleteRef = useRef(onComplete);
-  const soundTypeRef = useRef(soundType);
-  const activeAudioRef = useRef(null);
+    const startTimer = (e) => {
+        let { total, hours, minutes, seconds } =
+            getTimeRemaining(e);
+        if (total >= 0) {
+            // update the timer
+            // check if less than 10 then we need to
+            // add '0' at the beginning of the variable
+            setTimer(
+                (hours > 9 ? hours : "0" + hours) +
+                ":" +
+                (minutes > 9
+                    ? minutes
+                    : "0" + minutes) +
+                ":" +
+                (seconds > 9 ? seconds : "0" + seconds)
+            );
+        }
+    };
 
-  useEffect(() => {
-    onCompleteRef.current = onComplete;
-  }, [onComplete]);
+    const clearTimer = (e) => {
+        // If you adjust it you should also need to
+        // adjust the Endtime formula we are about
+        // to code next
+        setTimer("00:00:10");
 
-  useEffect(() => {
-    soundTypeRef.current = soundType;
-  }, [soundType]);
+        // If you try to remove this line the
+        // updating of timer Variable will be
+        // after 1000ms or 1sec
+        if (Ref.current) clearInterval(Ref.current);
+        const id = setInterval(() => {
+            startTimer(e);
+        }, 1000);
+        Ref.current = id;
+    };
 
-  useEffect(() => {
-    if (!isRunning) return undefined;
+    const getDeadTime = () => {
+        let deadline = new Date();
 
-    const id = setInterval(() => {
-      const remaining = Math.max(
-        0,
-        Math.ceil((endTimeRef.current - Date.now()) / 1000)
-      );
-      setSecondsLeft(remaining);
+        // This is where you need to adjust if
+        // you entend to add more time
+        deadline.setSeconds(deadline.getSeconds() + 10);
+        return deadline;
+    };
 
-      if (remaining === 0) {
-        clearInterval(id);
-        setIsRunning(false);
-        setIsComplete(true);
+    // Another way to call the clearTimer() to start
+    // the countdown is via action event from the
+    // button first we create function to be called
+    // by the button
+    const onClickReset = () => {
+        clearTimer(getDeadTime());
+    };
 
-        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
-        stopTimerDoneSound();
-        activeAudioRef.current = playTimerDoneSound(soundTypeRef.current);
-        if (onCompleteRef.current) onCompleteRef.current();
-      }
-    }, 250);
+    return (
+        <div
+            style={{ textAlign: "center", margin: "auto" }}>
+            <h3>Timer</h3>
+            <h2>{timer}</h2>
+            <button onClick={onClickReset}>Reset</button>
+        </div>
+    );
+};
 
-    return () => clearInterval(id);
-  }, [isRunning]);
+export default Timer;
 
-  const stopTimerDoneSound = () => {
-    if (!activeAudioRef.current) return;
-
-    activeAudioRef.current.pause();
-    activeAudioRef.current.currentTime = 0;
-    activeAudioRef.current = null;
-  };
-
-  const handleStart = () => {
-    stopTimerDoneSound();
-
-    const nextSeconds = secondsLeft === 0 ? duration : secondsLeft;
-
-    endTimeRef.current = Date.now() + nextSeconds * 1000;
-    setSecondsLeft(nextSeconds);
-    setIsComplete(false);
-    setIsRunning(true);
-  }
-
-  const handlePause = () => setIsRunning(false);
-
-  const handleReset = () => {
-    stopTimerDoneSound();
-
-    setIsRunning(false);
-    setSecondsLeft(duration);
-    setIsComplete(false);
-  };
-
-  const handlePreset = (seconds) => {
-    setIsRunning(false);
-    setDuration(seconds);
-    setSecondsLeft(seconds);
-    setIsComplete(false);
-  };
-
-  function handleCustomTime() {
-    const newTime = Number(customTime);
-
-    if(newTime > 0) {
-      setIsRunning(false);
-      setDuration(newTime);
-      setSecondsLeft(newTime);
-      setIsComplete(false);
-      setCustomTime("");
-    }
-  }
-
-  function addThirtySeconds() {
-    const newTime = secondsLeft + 30;
-
-    if (isRunning){
-      endTimeRef.current += 30000;
-    }
-
-    setSecondsLeft(newTime);
-    setDuration((currentDuration) =>
-      isRunning ? currentDuration + 30 : newTime);
-    setIsComplete(false);
-  }
-
-  return (
-    <div style={{ textAlign: "center", padding: "1rem" }}>
-      <h2>Rest Timer</h2>
-
-      <div
-        role="timer"
-        aria-live="off"
-        style={{ fontSize: "3rem", fontWeight: "bold", margin: "0.5rem 0" }}
-      >
-        {formatTime(secondsLeft)}
-      </div>
-      <progress
-        value={secondsLeft}
-        max={duration}
-        style={{ width: "250px" }}
-      ></progress>
-
-      <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
-        {PRESETS.map((seconds) => (
-          <button
-            key={seconds}
-            onClick={() => handlePreset(seconds)}
-            disabled={isRunning}
-            aria-pressed={duration === seconds}
-          >
-            {seconds}s
-          </button>
-        ))}
-      </div>
-
-      <div style={{ marginTop: "1rem" }}>
-        <input
-          type="number"
-          placeholder="Custom seconds"
-          value={customTime}
-          onChange={(event) => setCustomTime(event.target.value)}
-          min="1"
-          step="1"
-        />
-
-        <button
-          onClick={handleCustomTime}
-          disabled={isRunning}
-        >
-          Set Time
-        </button>
-      </div>
-
-      <div style={{ marginTop: "1rem" }}>
-        <label htmlFor="timer-sound" style={{ marginRight: "0.5rem" }}>
-          Finish sound
-        </label>
-
-        <select
-          id="timer-sound"
-          value={soundType}
-          onChange={(event) => setSoundType(event.target.value)}
-          disabled={isRunning}
-        >
-          <option value="turkishMarch">Mozart - Turkish March</option>
-          <option value="chopinTorrent">Chopin - Etude Torrent</option>
-          <option value="vivaldiSummer">Vivaldi - Summer</option>
-        </select>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          gap: "0.5rem",
-          justifyContent: "center",
-          marginTop: "1rem",
-        }}
-      >
-        {isRunning ? (
-          <button onClick={handlePause}>Pause</button>
-        ) : (
-          <button onClick={handleStart}>Start</button>
-        )}
-        <button onClick={handleReset}>Reset</button>
-
-        <button onClick={addThirtySeconds}>
-          +30s
-        </button>
-      </div>
-      {isComplete && (
-        <h3>Rest complete. Next set ready.</h3>
-      )}
-    </div>
-  );
-}
