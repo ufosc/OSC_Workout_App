@@ -1,13 +1,35 @@
-// current session the user will be working on during their workout, where they will log what exersises and weight they are perorming
+import { useState } from "react";
 import Timer from "./Timer";
+import WorkoutList from "./WorkoutList";
 
 function Session() {
-    return(
-        <div style={{textAlign: "center", padding:"2rem" }}>
-            <h1>Workout Session</h1>
-            <Timer/>
+  const [selectedExercises, setSelectedExercises] = useState([]);
+
+  const handleSelectExercise = (exercise) => {
+    setSelectedExercises((prev) => [...prev, exercise]);
+  };
+
+  return (
+    <div style={{ textAlign: "center", padding: "2rem" }}>
+      <h1>Workout Session</h1>
+
+      <Timer />
+
+      <WorkoutList onSelectExercise={handleSelectExercise} />
+
+      {selectedExercises.length > 0 && (
+        <div>
+          <h2>Current Routine</h2>
+
+          {selectedExercises.map((exercise, index) => (
+            <p key={`${exercise.id}-${index}`}>
+              {exercise.name}
+            </p>
+          ))}
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default Session;
