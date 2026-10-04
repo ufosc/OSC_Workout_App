@@ -9,7 +9,8 @@ const Timer = () => {
     const Ref = useRef(null);
 
     // The state for our timer
-    const [timer, setTimer] = useState("00:00:00");
+    const [timer, setTimer] = useState("00:02:00");
+    const [timerSec, setTimerSec] = useState(120);
 
     const getTimeRemaining = (e) => {
         const total =
@@ -52,7 +53,7 @@ const Timer = () => {
         // If you adjust it you should also need to
         // adjust the Endtime formula we are about
         // to code next
-        setTimer("00:00:10");
+        startTimer(e);
 
         // If you try to remove this line the
         // updating of timer Variable will be
@@ -69,7 +70,7 @@ const Timer = () => {
 
         // This is where you need to adjust if
         // you entend to add more time
-        deadline.setSeconds(deadline.getSeconds() + 10);
+        deadline.setSeconds(deadline.getSeconds() + timerSec);
         return deadline;
     };
 
@@ -86,7 +87,8 @@ const Timer = () => {
             style={{ textAlign: "center", margin: "auto" }}>
             <h3>Timer</h3>
             <h2>{timer}</h2>
-            <button onClick={onClickReset}>Reset</button>
+            <input type = "number" placeholder="Seconds" onChange={(e) => setTimerSec(Number(e.target.value))}/>
+            <button onClick={onClickReset}>Start</button>
         </div>
     );
 };
