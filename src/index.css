@@ -5,9 +5,64 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--home-bottom);
+  color: var(--text-button);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+  --home-top: #021026;  /*top page first color of the gradient*/
+  --home-bottom: #000000; /*Top of bage last color of the gradient*/
+ 
+  --bright-blue: #00a8ff;   /*neon colors currently on page  */
+  --bright-red: #ff1e4b;
+  --bright-green: #00e08a;
+
+  --glow-title: #ea1203;  /*red glow around the top title*/
+  --glow-action: #1cd34d;  /*green glow around the begin workout card*/
+
+  --nav-text: #eaf6ff; /*top nav bar buttons text color*/
+  --text-button: #ffffff; /*text and button color*/
+
+  --panel-shadow: rgba(0, 0, 0, 0.6); /*shadow under the choices panel*/
+}
+
+[data-theme="light"] {
+  --home-top: #f4f8ff;  /*top of page first color of the gradient, pale blue*/
+  --home-bottom: #dce8fa; /*bottom of page last color of the gradient, a bit darker*/
+
+  --bright-blue: #0067b8;   /*darker neon colors so they show on a pale page*/
+  --bright-red: #c4122f;
+  --bright-green: #0a7a4a;
+
+  --glow-title: rgba(234, 18, 3, 0.07);  /*red glow around the title, much weaker on pale or the text turns to haze*/
+  --glow-action: rgba(28, 211, 77, 0.2);  /*green glow around the begin workout card, weaker*/
+
+  --nav-text: #10203a; /*nav bar text, dark navy*/
+  --text-button: #10203a; /*text and button color, dark navy*/
+
+  --panel-shadow: rgba(16, 32, 58, 0.15); /*soft shadow under the choices panel*/
+}
+
+[data-theme="colorblind"] {
+  --bright-blue: #56b4e9;   /*sky blue*/
+  --bright-red: #e69f00;  /*orange, red and green look the same to protanopia and deuteranopia*/
+  --bright-green: #009e73;  /*bluish green, the yellow was too close to the orange for deuteranopia*/
+
+  --glow-title: #e69f00;  /*orange glow around the top title*/
+  --glow-action: #56b4e9;  /*sky blue glow around the begin workout card*/
+}
+
+body, .text, .button, nav a {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, text-shadow 0.3s, box-shadow 0.3s; /*smooth switch, gradients cant animate so the home page one just changes*/
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important; /*no animation if the user turned motion off*/
+  }
 }

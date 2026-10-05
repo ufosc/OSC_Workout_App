@@ -5,6 +5,7 @@ import Signup from './Components/Signup';
 import Brainrot from "./Components/Brainrot";
 import Home from './Pages/Home';
 import Session from './Components/Session';
+import ThemeToggle from './Components/ThemeToggle';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           >
             Brainrot
           </NavLink>
+          <ThemeToggle />
         </nav>
 
         <div>

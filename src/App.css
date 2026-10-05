@@ -3,26 +3,31 @@
 }
 
 .text{
-  color: #fff !important;
-    -webkit-text-stroke:  0.04em #EA1203;
+  color: var(--text-button) !important;
+    -webkit-text-stroke:  0.04em var(--glow-title);
   text-shadow:
-      0 0 3px #EA1203,
-      0 0 5px #EA1203,
-      0 0 8px #EA1203,
-      0 0 12px #EA1203,
-      0 0 20px #EA1203,
-      0 0 25px #EA1203,
-      0 0 30px #EA1203,
-      0 0 40px #EA1203 !important;
+      0 0 3px var(--glow-title),
+      0 0 5px var(--glow-title),
+      0 0 8px var(--glow-title),
+      0 0 12px var(--glow-title),
+      0 0 20px var(--glow-title),
+      0 0 25px var(--glow-title),
+      0 0 30px var(--glow-title),
+      0 0 40px var(--glow-title) !important;
 }
 
 .button{
-  border: 2px solid #fff !important;
+  border: 2px solid var(--text-button) !important;
   box-shadow: 
-    0 0 5px #1CD34D,
-    0 0 10px #1CD34D,
-    0 0 15px #1CD34D,
-    0 0 20px #1CD34D,
-    0 0 30px #1CD34D,
-    inset 0 0 5px rgba(28, 211, 77, 0.3) !important;
+    0 0 5px var(--glow-action),
+    0 0 10px var(--glow-action),
+    0 0 15px var(--glow-action),
+    0 0 20px var(--glow-action),
+    0 0 30px var(--glow-action),
+    inset 0 0 5px color-mix(in srgb, var(--glow-action) 30%, transparent) !important;
 }
+
+nav a { color: var(--nav-text);}
+
+.theme-picker { margin-left: 1rem; color: var(--nav-text); } /*the theme dropdown sits at the end of the nav bar*/
+.theme-picker select { background: var(--home-bottom); color: var(--nav-text); border: 1px solid var(--bright-blue); border-radius: 6px; padding: 0.15rem 0.4rem; } /*same colors as the page so it changes with the theme*/

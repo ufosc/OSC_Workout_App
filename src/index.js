@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { getSavedTheme, applyTheme } from './Utils/theme';
+
+// puts the saved theme on before react draws anything so the page doesnt flash the wrong colors
+applyTheme(getSavedTheme());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
