@@ -4,6 +4,16 @@ If you like exercising but don’t want to pay the $3 a month that top-tier work
 
 
 ## Quick Start
+### Custom exercise library
+
+Open **Begin Workout** on the home page. The workout screen includes a **Create your own exercise** form with exercise name, body part / muscle group, target muscle, equipment, exercise type (weight and repetitions, bodyweight, or timed), and optional notes. Use "none" for exercises requiring no equipment.
+
+Saved custom exercises appear in **Saved Exercises**, and can be searched, filtered, and added to the current routine. Exercises selected from the online library are saved too. Removing an exercise from the current routine does not remove its saved definition. Routine selections are currently kept only for the mounted workout screen; this feature does not implement workout history or set logging.
+
+Definitions are stored under `osc-exercise-library` in this browser's local storage, shared across local profiles. Other app features can reuse them through `getSavedExercises()` in `src/Utils/exerciseLibrary.js`. They remain after reloads, but do not sync between devices and are removed if browser data is cleared.
+
+Custom and saved exercises work without an API key. To also load the online ExerciseDB library, set `REACT_APP_RAPIDAPI_KEY` in your ignored `.env` file and restart the development server. Failure to fetch online exercises does not block the saved library.
+
 Trying to just get the project running on your local machine? You are in the right spot!
 
 ```sh

@@ -1,0 +1,46 @@
+.workout-list-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  text-align: left;
+}
+.custom-exercise-form, .exercise-card {
+  padding: 1rem;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow-wrap: anywhere;
+}
+.exercise-form-fields, .exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 1rem;
+}
+.exercise-form-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.exercise-form-fields input, .exercise-form-fields select, .exercise-form-fields textarea {
+  padding: .6rem;
+  font: inherit;
+  min-width: 0;
+}
+.tab-navigation, .filter-controls, .exercise-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 1rem 0;
+}
+.exercise-image {
+  max-width: 100%;
+  height: 160px;
+  object-fit: contain;
+}
+.workout-list-container button {
+  padding: .6rem .9rem;
+  cursor: pointer;
+}
+.tab-navigation button[aria-pressed="true"], .tab-navigation .active {
+  font-weight: bold;
+  outline: 2px solid #0067a3;
+}
