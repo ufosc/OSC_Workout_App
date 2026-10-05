@@ -1,14 +1,8 @@
 // theme for the whole app, saved in localStorage so it stays after a reload
 
 const THEME_KEY = 'osc-theme'; // the name the saved theme is stored under
-const DEFAULT_THEME = 'system'; // used when nothing is saved yet
-export const THEME_CHOICES = ['system', 'dark', 'light', 'colorblind']; // the 4 options in the dropdown
-
-// what the operating system is set to, light or dark
-function getSystemTheme() {
-    const osPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches; // true if the os is on light
-    return osPrefersLight ? 'light' : 'dark';
-}
+const DEFAULT_THEME = 'dark'; // the original neon look, used when nothing is saved yet
+export const THEME_CHOICES = ['dark', 'light', 'colorblind']; // the 3 options in the dropdown
 
 // the theme saved last time, or the default if nothing valid is saved
 export function getSavedTheme() {
@@ -34,8 +28,7 @@ function updateBrowserBarColor() {
 
 // puts the theme on the html tag, the css variables change from there
 export function applyTheme(themeChoice) {
-    const themeName = themeChoice === 'system' ? getSystemTheme() : themeChoice; // system turns into dark or light
-    document.documentElement.setAttribute('data-theme', themeName); // index.css looks for this
+    document.documentElement.setAttribute('data-theme', themeChoice); // index.css looks for this
     updateBrowserBarColor(); // has to come after the line above so the new colors are read
 }
 
@@ -50,16 +43,6 @@ export function setTheme(themeChoice) {
     } catch (error) {
         // localStorage is blocked, the theme still works until the page reloads
     }
-}
-
-// follows the os if it switches between light and dark while the page is open
-export function watchSystemTheme() {
-    const osLightQuery = window.matchMedia('(prefers-color-scheme: light)');
-    osLightQuery.addEventListener('change', () => {
-        if (getSavedTheme() === 'system') { // only matters if the user picked system
-            applyTheme('system');
-        }
-    });
 }
 
 // keeps other open tabs of the app in step, the browser only fires this in the tabs that did not make the change
