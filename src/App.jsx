@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
 import Login from './Components/Login';
@@ -7,9 +8,10 @@ import Home from './Pages/Home';
 import Session from './Components/Session';
 
 function App() {
+  const [theme, setTheme] = useState('dark');
   return (
     <Router>
-      <div className="App">
+      <div className={`App them-${theme}`}>
         <nav >
           <NavLink 
             to="/">
@@ -35,7 +37,7 @@ function App() {
 
         <div>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home theme={theme} setTheme={setThemed} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/brainrot" element={<Brainrot />} />
