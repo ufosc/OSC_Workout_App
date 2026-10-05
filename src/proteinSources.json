@@ -1,0 +1,51 @@
+[
+  {
+    "id": "1",
+    "name": "Chicken Breast (Cooked)",
+    "proteinGrams": 31,
+    "servingSize": "100g",
+    "category": "Poultry"
+  },
+  {
+    "id": "2",
+    "name": "Greek Yogurt (Non-Fat)",
+    "proteinGrams": 10,
+    "servingSize": "100g",
+    "category": "Dairy"
+  },
+  {
+    "id": "3",
+    "name": "Salmon (Cooked)",
+    "proteinGrams": 25,
+    "servingSize": "100g",
+    "category": "Seafood"
+  },
+  {
+    "id": "4",
+    "name": "Firm Tofu",
+    "proteinGrams": 8,
+    "servingSize": "100g",
+    "category": "Plant-Based"
+  },
+  {
+    "id": "5",
+    "name": "Eggs (Whole)",
+    "proteinGrams": 13,
+    "servingSize": "100g (approx. 2 large eggs)",
+    "category": "Dairy/Eggs"
+  },
+  {
+    "id": "6",
+    "name": "Whey Protein Isolate",
+    "proteinGrams": 25,
+    "servingSize": "1 scoop (30g)",
+    "category": "Supplements"
+  },
+  {
+    "id": "7",
+    "name": "Ground Beef (85/15 Cooked)",
+    "proteinGrams": 26,
+    "servingSize": "100g",
+    "category": "Meat"
+  }
+]
