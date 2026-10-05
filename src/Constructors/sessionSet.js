@@ -1,10 +1,11 @@
 
 class SetObject {
-    constructor(weight=0,reps,time=0,type,activeTime=False){
+    constructor(weight = 0, reps = 0, time = 0, type = "WeightBased", activeTime = false) {
         this.weight = weight;
         this.reps = reps;
         this.time = time;
-        this.timeType=activeTime 
+        this.type = type;
+        this.timeType = activeTime;
     }
     setWeight(newWeight){
         this.weight=newWeight;
@@ -13,7 +14,7 @@ class SetObject {
         this.reps=newReps;
     }
     setTime(newTime){
-        this.setTime=newTime;
+        this.time=newTime;
     }
     getTime() {
         return this.time;
@@ -25,5 +26,7 @@ class SetObject {
         return this.reps;
     }
 }
+
+export default SetObject;
 
 
