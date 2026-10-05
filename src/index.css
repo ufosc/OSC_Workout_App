@@ -51,7 +51,7 @@ code {
 [data-theme="colorblind"] {
   --bright-blue: #56b4e9;   /*sky blue*/
   --bright-red: #e69f00;  /*orange, red and green look the same to protanopia and deuteranopia*/
-  --bright-green: #f0e442;  /*yellow*/
+  --bright-green: #009e73;  /*bluish green, the yellow was too close to the orange for deuteranopia*/
 
   --glow-title: #e69f00;  /*orange glow around the top title*/
   --glow-action: #56b4e9;  /*sky blue glow around the begin workout card*/
