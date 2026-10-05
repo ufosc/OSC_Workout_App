@@ -4,46 +4,47 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Brainrot from "./Components/Brainrot";
 import Home from './Pages/Home';
-import Session from './Components/Session';
+import { ThemeProvider, useTheme } from './Theme/ThemeContext';
+
+function Navigation() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <nav className="main-nav">
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/signup">Signup</NavLink>
+      <NavLink to="/brainrot">Brainrot</NavLink>
+
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        aria-label={`Current theme: ${theme}. Click to change theme.`}
+      >
+        Theme: {theme}
+      </button>
+    </nav>
+  );
+}
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <nav >
-          <NavLink 
-            to="/">
-            Home
-          </NavLink>
-          <NavLink 
-            to="/login" 
+    <ThemeProvider>
+      <Router>
+        <div className="App">
+          <Navigation />
 
-          >
-            Login
-          </NavLink>
-          <NavLink 
-            to="/signup" 
-          >
-            Signup
-          </NavLink>
-          <NavLink 
-            to="/brainrot" 
-          >
-            Brainrot
-          </NavLink>
-        </nav>
-
-        <div>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/brainrot" element={<Brainrot />} />
-            <Route path="/session" element={<Session />} />
-          </Routes>
+          <div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/brainrot" element={<Brainrot />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 }
 
