@@ -1,10 +1,14 @@
 // generated list of workouts based on relevance to user, muscle group or frequently used
 import React, {useState, useEffect, useMemo} from 'react';
+import CreateExercise from './CreateExercise';
+import { getCustomExercises, addCustomExercise } from '../Utils/customexercises';
+
 
 const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [customexercises, setCustomExercises] = useState(getCustomExercises());
 
   //filter & Search states
   const [searchTerm, setSearchTerm] = useState('');
@@ -42,16 +46,27 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
 
     fetchExercises();
   }, []);
+  
+  //Merge new exercises that are created by a user
+    const allExercises = useMemo(
+    () => [...customexercises, ...exercises],
+    [customexercises, exercises]
+  );
+
+  const handleCreate = (newExercise) => {
+    setCustomExercises(addCustomExercise(newExercise));
+  };
+
 
   //Extract unique muscle groups/body parts dynamically
   const muscleGroups = useMemo(() => {
-    const groups = new Set(exercises.map((ex) => ex.bodyPart).filter(Boolean));
+    const groups = new Set(allExercises.map((ex) => ex.bodyPart).filter(Boolean));
     return ['all', ...Array.from(groups)];
-  }, [exercises]);
+  }, [allExercises]);
 
   //filter logic based on search, selected muscle group, and view tab
   const filteredExercises = useMemo(() => {
-    return exercises.filter((exercise) => {
+    return allExercises.filter((exercise) => {
       //1. Frequently Used filter
       if (viewTab === 'frequently_used' && !frequentlyUsedIds.includes(exercise.id)) {
         return false;
@@ -82,12 +97,13 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   };
 
   if (loading) return <div className="loading-spinner">Loading exercise library...</div>;
-  if (error) return <div className="error-message">Error fetching exercises: {error}</div>;
 
   return (
     <div className="workout-list-container">
       <h2>Workout Exercises</h2>
 
+      {error && <p className="error-message">Couldn't load the exercise library ({error}). Custom exercises still work.</p>}
+      <CreateExercise exercises={allExercises} onCreate={handleCreate} />
       {/* View Tabs: All, Frequently Used */}
       <div className="tab-navigation">
         <button
@@ -145,6 +161,7 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
                 />
               )}
               <h3 className="exercise-title">{exercise.name}</h3>
+              {exercise.variantOf && (<p className="variant-label">Variant of {allExercises.find((ex) => ex.id === exercise.variantOf)?.name}</p>)}
               <div className="exercise-meta">
                 <span className="badge muscle">{exercise.bodyPart}</span>
                 <span className="badge target">{exercise.target}</span>
