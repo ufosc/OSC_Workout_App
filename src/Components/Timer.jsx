@@ -97,6 +97,7 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
   };
 
   const handlePreset = (seconds) => {
+    stopTimerDoneSound();
     setIsRunning(false);
     setDuration(seconds);
     setSecondsLeft(seconds);
@@ -107,6 +108,7 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
     const newTime = Number(customTime);
 
     if(newTime > 0) {
+      stopTimerDoneSound();
       setIsRunning(false);
       setDuration(newTime);
       setSecondsLeft(newTime);
@@ -116,6 +118,7 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
   }
 
   function addThirtySeconds() {
+    stopTimerDoneSound();
     const newTime = secondsLeft + 30;
 
     if (isRunning){
