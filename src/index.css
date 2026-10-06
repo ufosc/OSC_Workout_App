@@ -4,8 +4,8 @@
 */
 :root {
   --bg: radial-gradient(circle at 10% 10%, #021026 0%, #000 60%);
-  --text: #eaf6ff;
-  --text-heading: #ffffff;
+  --text: #ffffff;
+  --text-heading: #f3f4f6;
   --text-soft: #cfe8ff;
   --text-faint: rgba(200, 220, 255, 0.5); 
   --surface: rgba(255, 255, 255, 0.02); 
@@ -24,20 +24,20 @@
   2) Light
 */
 [data-theme="light"] {
-  --bg: radial-gradient(circle at 10% 10%, #e8f3ff 0%, #ffffff 60%);
-  --text: #0b1a2b;
-  --text-heading: #000c1a;
-  --text-soft: #24476b;
-  --text-faint: rgba(11, 26, 43, 0.55);
-  --surface: rgba(0,0,0,0.03); /* black at the low opacity*/
-  --surface-border: rgba(0,0,0,0.08);
-  --shadow: rgba(0, 0, 0, 0.12);
-  --accent-1: #0077cc; /*BLUE*/
-  --accent-2: #d11230; /*RED*/
-  --accent-3: #008a51; /*GREEN*/
-  --text-glow: transparent;
-  --button-glow: rgba(0, 119, 204, 0.35);
-  --on-accent: #fff;
+  --bg: radial-gradient(circle at 10% 10%, #e6f0ff 0%, #ffffff 60%);
+  --text: #111827;                       
+  --text-heading: #0b1220;
+  --text-soft: #1e3a5f;
+  --text-faint: rgba(30, 58, 95, 0.6);
+  --surface: rgba(0, 0, 0, 0.03);        
+  --surface-border: rgba(0, 0, 0, 0.08);
+  --shadow: rgba(0, 0, 0, 0.15);        
+  --accent-1: #0077cc;                   
+  --accent-2: #d90429;                  
+  --accent-3: #00995e;                   
+  --text-glow: #d90429;
+  --button-glow: #16a34a;
+  --on-accent: #ffffff;                 
 }
 
 /*
@@ -46,10 +46,10 @@
 [data-theme="colorblind"] {
   --accent-1: #56b4e9;
   --accent-2: #e69f00; /* Orange instead of red*/
-  --accent-3: #f0e442; /* Yellow instead of green*/
+  --accent-3: #56B4E9; /* Yellow instead of green*/
   --text-glow: #e69f00;
   --button-glow: #56b4e9;
-  --on-accent: #000;
+  --on-accent: #000000;
 }
 
 /*************** = ALREADY IN PROGRAM = ****************/
