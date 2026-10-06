@@ -8,8 +8,8 @@
 
 .home-root{
   min-height:100vh;
-  background: radial-gradient(circle at 10% 10%, #021026 0%, #000 60%);
-  color: #eaf6ff;
+  background: radial-gradient(--background-color);
+  color: var(--text-color);
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -18,8 +18,8 @@
 }
 
 .home-header{ text-align:center; margin-bottom:1.5rem; }
-.neon-title{ font-size:2rem; margin:0; color:#ffffff; text-shadow:0 0 8px rgba(0,168,255,0.9),0 0 18px rgba(255,30,75,0.35); }
-.neon-subtitle{ margin:0.4rem 0 0; color:rgba(20, 235, 5, 0.8); }
+.neon-title{ font-size:2rem; margin:0; color: var(--text-color); text-shadow:0 0 8px rgba(0,168,255,0.9),0 0 18px rgba(255,30,75,0.35); }
+.neon-subtitle{ margin:0.4rem 0 0; color:var(--accent-color); }
 
 .home-main{ width:100%; max-width:1000px; }
 
@@ -36,11 +36,11 @@
   width: 100%;
   position: relative;
 }
-.panel-title{ margin:0 0 1rem 0; font-size:1.05rem; color:#cfe8ff; text-align:center; }
+.panel-title{ margin:0 0 1rem 0; font-size:1.05rem; color: var(--text-color); text-align:center; }
 
 .links-grid{ display:flex; gap:1rem; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
 
-.link-card{ background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:10px; padding:0.8rem; color:#fff; min-width:140px; box-sizing:border-box; display:flex; flex-direction:column; gap:0.35rem; align-items:flex-start; border:1px solid rgba(255,255,255,0.04); }
+.link-card{ background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:10px; padding:0.8rem; color: var(--text-color); }
 .link-card .card-title{ font-weight:700; }
 .link-card .card-sub{ font-size:0.85rem; opacity:0.9; }
 
@@ -67,6 +67,11 @@
 .auth-begin-button{ background:var(--neon-blue); padding:0.55rem 0.9rem; border-radius:8px; border:none; color:#fff; cursor:pointer; }
 
 .home-footer{ margin-top:1.5rem; color:rgba(200,220,255,0.5); text-align:center; }
+
+.theme-selector {display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;}
+.theme-selector p {margin-right: 0.5rem;}
+.them-button {background-color: var(--background-color); color: var(--text-color); border: 2px solid var(--accent-color); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;}
+.theme-button.active {background-color: var(--accent-color); color: var(--background-color);}
 
 @media (max-width:720px){
   .links-grid{ flex-direction:column; align-items:center;  }
