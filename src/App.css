@@ -3,26 +3,28 @@
 }
 
 .text{
-  color: #fff !important;
-    -webkit-text-stroke:  0.04em #EA1203;
+  color: var(--text-heading) !important;
+    -webkit-text-stroke:  0.04em var(--text-glow);
   text-shadow:
-      0 0 3px #EA1203,
-      0 0 5px #EA1203,
-      0 0 8px #EA1203,
-      0 0 12px #EA1203,
-      0 0 20px #EA1203,
-      0 0 25px #EA1203,
-      0 0 30px #EA1203,
-      0 0 40px #EA1203 !important;
+      0 0 3px var(--text-glow),
+      0 0 5px var(--text-glow),
+      0 0 8px var(--text-glow),
+      0 0 12px var(--text-glow),
+      0 0 20px var(--text-glow),
+      0 0 25px var(--text-glow),
+      0 0 30px var(--text-glow),
+      0 0 40px var(--text-glow) !important;
 }
 
 .button{
-  border: 2px solid #fff !important;
+  border: 2px solid var(--text-heading) !important;
   box-shadow: 
-    0 0 5px #1CD34D,
-    0 0 10px #1CD34D,
-    0 0 15px #1CD34D,
-    0 0 20px #1CD34D,
-    0 0 30px #1CD34D,
-    inset 0 0 5px rgba(28, 211, 77, 0.3) !important;
+    0 0 5px var(--button-glow),
+    0 0 10px var(--button-glow),
+    0 0 15px var(--button-glow),
+    0 0 20px var(--button-glow),
+    0 0 30px var(--button-glow),
+    inset 0 0 5px color-mix(in srgb, var(--button-glow) 30%, transparent) !important;
 }
+
+nav a { color: var(--accent-1);}

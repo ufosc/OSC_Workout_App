@@ -1,3 +1,58 @@
+/****************** = THEMES = ***********************/
+/*
+  1) Dark - DEFAULT
+*/
+:root {
+  --bg: radial-gradient(circle at 10% 10%, #021026 0%, #000 60%);
+  --text: #eaf6ff;
+  --text-heading: #ffffff;
+  --text-soft: #cfe8ff;
+  --text-faint: rgba(200, 220, 255, 0.5); 
+  --surface: rgba(255, 255, 255, 0.02); 
+  --surface-border: rgba(255, 255, 255, 0.04); 
+  --shadow: rgba(0,0,0,0.6);
+  --accent-1: #00a8ff; /*BLUE*/
+  --accent-2: #ff1e4b; /*RED*/
+  --accent-3: #00e08a; /*GREEN*/
+  --text-glow: #ea1203;
+  --button-glow: #1cd34d;
+  --swiper-theme-color: var(--accent-1);
+  --on-accent: #000;
+}
+
+/*
+  2) Light
+*/
+[data-theme="light"] {
+  --bg: radial-gradient(circle at 10% 10%, #e8f3ff 0%, #ffffff 60%);
+  --text: #0b1a2b;
+  --text-heading: #000c1a;
+  --text-soft: #24476b;
+  --text-faint: rgba(11, 26, 43, 0.55);
+  --surface: rgba(0,0,0,0.03); /* black at the low opacity*/
+  --surface-border: rgba(0,0,0,0.08);
+  --shadow: rgba(0, 0, 0, 0.12);
+  --accent-1: #0077cc; /*BLUE*/
+  --accent-2: #d11230; /*RED*/
+  --accent-3: #008a51; /*GREEN*/
+  --text-glow: transparent;
+  --button-glow: rgba(0, 119, 204, 0.35);
+  --on-accent: #fff;
+}
+
+/*
+  3) Colorblind - DARK BASE BUT R/G = O/Y
+*/
+[data-theme="colorblind"] {
+  --accent-1: #56b4e9;
+  --accent-2: #e69f00; /* Orange instead of red*/
+  --accent-3: #f0e442; /* Yellow instead of green*/
+  --text-glow: #e69f00;
+  --button-glow: #56b4e9;
+  --on-accent: #000;
+}
+
+/*************** = ALREADY IN PROGRAM = ****************/
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +60,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--bg); 
+  color: var(--text); 
+  transition: color 0.3s ease;
 }
 
 code {
