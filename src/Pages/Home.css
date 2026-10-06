@@ -51,6 +51,17 @@
 .begin-card .begin-button{ background: linear-gradient(90deg,var(--neon-blue), var(--neon-red)); color:#fff; border:none; padding:0.9rem 1.25rem; border-radius:12px; cursor:pointer; font-weight:700; box-shadow:0 8px 36px rgba(0,0,0,0.6), 0 0 30px rgba(0,168,255,0.12); }
 .begin-card .begin-button:hover{ transform:translateY(-3px); }
 
+.neon-blue-border {
+  border: 2px solid #fff;
+  box-shadow:
+    0 0 5px var(--neon-blue),
+    0 0 10px var(--neon-blue),
+    0 0 15px var(--neon-blue),
+    0 0 20px var(--neon-blue),
+    0 0 30px var(--neon-blue),
+    inset 0 0 5px rgba(0, 168, 255, 0.3);
+}
+
 /* smaller less-noticeable links */
 .small-link{ opacity:2; min-width:160px; padding:0.6rem; border-radius:8px; font-size:0.95rem; }
 .neon-blue{ border:1px solid rgba(0,168,255,0.12); box-shadow:0 0 10px rgba(0,168,255,0.06); }
