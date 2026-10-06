@@ -33,9 +33,22 @@ class Exercise {
 
     
     addSet(setObject) {
-        if (setObject) {
-            this.setList.push(setObject);
+        // Accept both SetObject instances and plain sets made by addNewSet.
+        // Empty values are allowed, but the shared workout fields must exist.
+        const requiredFields = ["weight", "reps", "time", "type"];
+        if (
+            setObject === null ||
+            typeof setObject !== "object" ||
+            Array.isArray(setObject) ||
+            !requiredFields.every((field) =>
+                Object.prototype.hasOwnProperty.call(setObject, field)
+            )
+        ) {
+            return false;
         }
+
+        this.setList.push(setObject);
+        return true;
     }
 
     
@@ -48,7 +61,7 @@ class Exercise {
             type: type,
             completed: false
         };
-        this.setList.push(newSet);
+        this.addSet(newSet);
         return newSet;
     }
 
