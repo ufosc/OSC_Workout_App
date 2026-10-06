@@ -5,6 +5,7 @@ import Signup from './Components/Signup';
 import Brainrot from "./Components/Brainrot";
 import Home from './Pages/Home';
 import Session from './Components/Session';
+import WorkoutList from './Components/WorkoutList';
 
 function App() {
   return (
@@ -31,6 +32,11 @@ function App() {
           >
             Brainrot
           </NavLink>
+          <NavLink
+            to="/workouts"
+          >
+            Workouts
+          </NavLink>
         </nav>
 
         <div>
@@ -40,6 +46,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/brainrot" element={<Brainrot />} />
             <Route path="/session" element={<Session />} />
+            <Route path="/workouts" element={<WorkoutList />} />
           </Routes>
         </div>
       </div>
