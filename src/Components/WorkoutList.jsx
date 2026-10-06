@@ -1,10 +1,16 @@
 // generated list of workouts based on relevance to user, muscle group or frequently used
 import React, {useState, useEffect, useMemo} from 'react';
+import CreateExercise from './CreateExercise';
+import { loadCustomExercises, deleteCustomExercise } from '../Utils/customExercises';
 
 const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  //custom exercises the user made (issue #10), loaded from localStorage
+  const [customExercises, setCustomExercises] = useState(loadCustomExercises);
+  const [showCreateForm, setShowCreateForm] = useState(false);
 
   //filter & Search states
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,7 +38,7 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
         }
 
         const data = await response.json();
-        setExercises(data);
+        setExercises(Array.isArray(data) ? data : []);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -43,15 +49,21 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
     fetchExercises();
   }, []);
 
+  //API exercises and custom exercises together in one list
+  const allExercises = useMemo(
+    () => [...customExercises, ...exercises],
+    [customExercises, exercises]
+  );
+
   //Extract unique muscle groups/body parts dynamically
   const muscleGroups = useMemo(() => {
-    const groups = new Set(exercises.map((ex) => ex.bodyPart).filter(Boolean));
+    const groups = new Set(allExercises.map((ex) => ex.bodyPart).filter(Boolean));
     return ['all', ...Array.from(groups)];
-  }, [exercises]);
+  }, [allExercises]);
 
   //filter logic based on search, selected muscle group, and view tab
   const filteredExercises = useMemo(() => {
-    return exercises.filter((exercise) => {
+    return allExercises.filter((exercise) => {
       //1. Frequently Used filter
       if (viewTab === 'frequently_used' && !frequentlyUsedIds.includes(exercise.id)) {
         return false;
@@ -69,7 +81,7 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
 
       return matchesMuscle && matchesSearch;
     });
-  }, [exercises, viewTab, selectedMuscle, searchTerm, frequentlyUsedIds]);
+  }, [allExercises, viewTab, selectedMuscle, searchTerm, frequentlyUsedIds]);
 
   const handleSelect = (exercise) => {
     //dynamically add to frequently used list when selected
@@ -81,12 +93,44 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
     }
   };
 
-  if (loading) return <div className="loading-spinner">Loading exercise library...</div>;
-  if (error) return <div className="error-message">Error fetching exercises: {error}</div>;
+  //add a newly created exercise to the list and close the form
+  const handleCreated = (exercise) => {
+    setCustomExercises((prev) => [...prev, exercise]);
+    setShowCreateForm(false);
+  };
+
+  //remove a custom exercise
+  const handleDelete = (id) => {
+    deleteCustomExercise(id);
+    setCustomExercises((prev) => prev.filter((ex) => ex.id !== id));
+  };
+
+  //only block the page while loading if there are no custom exercises to show
+  if (loading && customExercises.length === 0) return <div className="loading-spinner">Loading exercise library...</div>;
 
   return (
     <div className="workout-list-container">
       <h2>Workout Exercises</h2>
+
+      {/* if the API fails, still show custom exercises instead of a blank error page */}
+      {error && (
+        <p className="api-warning">
+          Couldn't load the exercise library ({error}). Your custom exercises are still available.
+        </p>
+      )}
+
+      {/* button that opens the create exercise form (issue #10) */}
+      {showCreateForm ? (
+        <CreateExercise
+          existingExercises={allExercises}
+          onCreated={handleCreated}
+          onCancel={() => setShowCreateForm(false)}
+        />
+      ) : (
+        <button className="create-toggle-button" onClick={() => setShowCreateForm(true)}>
+          + Create Your Own Exercise
+        </button>
+      )}
 
       {/* View Tabs: All, Frequently Used */}
       <div className="tab-navigation">
@@ -145,7 +189,11 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
                 />
               )}
               <h3 className="exercise-title">{exercise.name}</h3>
+              {exercise.variantOfName && (
+                <p className="variant-label">Variant of {exercise.variantOfName}</p>
+              )}
               <div className="exercise-meta">
+                {exercise.isCustom && <span className="badge custom">Custom</span>}
                 <span className="badge muscle">{exercise.bodyPart}</span>
                 <span className="badge target">{exercise.target}</span>
                 <span className="badge equipment">{exercise.equipment}</span>
@@ -157,6 +205,11 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
               >
                 Add to Routine
               </button>
+              {exercise.isCustom && (
+                <button onClick={() => handleDelete(exercise.id)} className="delete-button">
+                  Delete
+                </button>
+              )}
             </div>
           ))
         )}
