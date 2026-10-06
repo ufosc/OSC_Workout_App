@@ -4,7 +4,7 @@ import './Home.css';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, getStreak } from '../Utils/streak';
 
-function Home() {
+function Home({theme, setTheme}) {
   const navigate = useNavigate();
   const user = getCurrentUser();
   const streak = user ? getStreak(user) : 0;
@@ -16,6 +16,29 @@ function Home() {
         <p className="neon-subtitle text">Lock in. Gain aura. Save money.</p>
         {user && <p className="neon-subtitle text">🔥 {streak} day streak</p>}
       </header>
+
+      <div className="theme-selector">
+        <p className="text">Choose Theme:</p>
+        <button className={theme === 'light' ? 'theme-button active' : 'theme-button'}
+          onClick={() => setTheme('light')}
+        >
+
+          Light
+        </button>
+        <button className={theme === 'dark' ? 'theme-button active' : 'theme-button'}
+          onClick={() => setTheme('dark')}
+        >
+
+          Dark
+        </button>
+
+        <button className={theme === 'colorblind' ? 'theme-button active' : 'theme-button'}
+          onClick={() => setTheme('colorblind')}
+        >
+          Colorblind
+        </button>
+      </div>
+       
 
       <main className="home-main">
         {/* Begin Workout - Prominent at the top */}

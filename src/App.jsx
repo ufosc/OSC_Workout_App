@@ -37,7 +37,7 @@ function App() {
 
         <div>
           <Routes>
-            <Route path="/" element={<Home theme={theme} setTheme={setThemed} />} />
+            <Route path="/" element={<Home theme={theme} setTheme={setTheme} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/brainrot" element={<Brainrot />} />
