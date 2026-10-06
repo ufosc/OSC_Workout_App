@@ -1,3 +1,128 @@
+:root,
+:root[data-theme='dark']{
+  --app-background: #020617;
+  --app-surface: #07111f;
+  --app-text: #eaf6ff;
+  --app-heading: #ffffff;
+  --app-muted: rgba(218, 231, 255, 0.72);
+  --app-primary: #00a8ff;
+  --home-background: radial-gradient(circle at 10% 10%, #082044 0%, #020617 62%);
+  --panel-background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --panel-shadow: rgba(0, 0, 0, 0.58);
+  --card-background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+  --card-border: rgba(255, 255, 255, 0.12);
+  --field-background: rgba(2, 6, 23, 0.8);
+  --control-background: rgba(255, 255, 255, 0.06);
+  --control-border: rgba(218, 231, 255, 0.28);
+  --focus-ring: rgba(0, 168, 255, 0.22);
+  --nav-background: rgba(2, 6, 23, 0.92);
+  --nav-link-active: rgba(0, 168, 255, 0.16);
+  --nav-shadow: rgba(0, 0, 0, 0.42);
+  --glow-text: #ffffff;
+  --text-stroke-color: #ff1e4b;
+  --text-stroke-width: 0.04em;
+  --text-glow:
+      0 0 3px #ff1e4b,
+      0 0 5px #ff1e4b,
+      0 0 8px #ff1e4b,
+      0 0 12px #ff1e4b,
+      0 0 20px rgba(255, 30, 75, 0.92),
+      0 0 30px rgba(255, 30, 75, 0.72);
+  --button-border: #ffffff;
+  --button-glow:
+    0 0 5px #00e08a,
+    0 0 10px #00e08a,
+    0 0 15px #00e08a,
+    0 0 22px rgba(0, 224, 138, 0.8),
+    inset 0 0 5px rgba(0, 224, 138, 0.3);
+  --neon-blue: #00a8ff;
+  --neon-red: #ff1e4b;
+  --neon-green: #00e08a;
+  --primary-gradient: linear-gradient(90deg,var(--neon-blue), var(--neon-red));
+  --button-text: #ffffff;
+  --badge-background: rgba(0, 168, 255, 0.16);
+  --badge-text: #eaf6ff;
+}
+
+:root[data-theme='light']{
+  --app-background: #f7fbff;
+  --app-surface: #ffffff;
+  --app-text: #1c2433;
+  --app-heading: #0f172a;
+  --app-muted: #5f6c80;
+  --app-primary: #005fcc;
+  --home-background: radial-gradient(circle at 10% 10%, #dff3ff 0%, #f7fbff 62%);
+  --panel-background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(235,244,255,0.78));
+  --panel-border: rgba(56, 82, 120, 0.18);
+  --panel-shadow: rgba(48, 72, 100, 0.16);
+  --card-background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(230,244,255,0.82));
+  --card-border: rgba(64, 96, 130, 0.18);
+  --field-background: #ffffff;
+  --control-background: #ffffff;
+  --control-border: rgba(64, 96, 130, 0.24);
+  --focus-ring: rgba(0, 95, 204, 0.18);
+  --nav-background: rgba(255, 255, 255, 0.94);
+  --nav-link-active: rgba(0, 95, 204, 0.12);
+  --nav-shadow: rgba(48, 72, 100, 0.14);
+  --glow-text: #0f172a;
+  --text-stroke-color: rgba(0, 95, 204, 0.36);
+  --text-stroke-width: 0.02em;
+  --text-glow:
+      0 0 2px rgba(0, 95, 204, 0.2),
+      0 0 8px rgba(0, 168, 255, 0.18);
+  --button-border: #ffffff;
+  --button-glow:
+    0 8px 24px rgba(0, 95, 204, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+  --neon-blue: #005fcc;
+  --neon-red: #c81e4d;
+  --neon-green: #087f5b;
+  --primary-gradient: linear-gradient(90deg,var(--neon-blue), var(--neon-red));
+  --button-text: #ffffff;
+  --badge-background: rgba(0, 95, 204, 0.12);
+  --badge-text: #14315f;
+}
+
+:root[data-theme='colorblind']{
+  --app-background: #f8f7f1;
+  --app-surface: #fffdfa;
+  --app-text: #171923;
+  --app-heading: #101828;
+  --app-muted: #4b5565;
+  --app-primary: #0072b2;
+  --home-background: radial-gradient(circle at 10% 10%, #d9f0ff 0%, #f8f7f1 64%);
+  --panel-background: linear-gradient(180deg, rgba(255,253,250,0.95), rgba(239,236,226,0.84));
+  --panel-border: rgba(22, 54, 90, 0.22);
+  --panel-shadow: rgba(45, 55, 72, 0.16);
+  --card-background: linear-gradient(135deg, rgba(255,253,250,0.98), rgba(236,244,248,0.86));
+  --card-border: rgba(25, 67, 112, 0.24);
+  --field-background: #fffdfa;
+  --control-background: #fffdfa;
+  --control-border: rgba(25, 67, 112, 0.28);
+  --focus-ring: rgba(0, 114, 178, 0.22);
+  --nav-background: rgba(255, 253, 250, 0.95);
+  --nav-link-active: rgba(0, 114, 178, 0.13);
+  --nav-shadow: rgba(45, 55, 72, 0.14);
+  --glow-text: #101828;
+  --text-stroke-color: rgba(0, 114, 178, 0.36);
+  --text-stroke-width: 0.02em;
+  --text-glow:
+      0 0 2px rgba(0, 114, 178, 0.18),
+      0 0 9px rgba(86, 180, 233, 0.22);
+  --button-border: #fffdfa;
+  --button-glow:
+    0 8px 24px rgba(0, 114, 178, 0.16),
+    inset 0 0 0 1px rgba(255, 253, 250, 0.82);
+  --neon-blue: #0072b2;
+  --neon-red: #d55e00;
+  --neon-green: #cc79a7;
+  --primary-gradient: linear-gradient(90deg,var(--neon-blue), var(--neon-red));
+  --button-text: #ffffff;
+  --badge-background: rgba(0, 114, 178, 0.12);
+  --badge-text: #16365a;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +130,63 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--app-background);
+  color: var(--app-text);
+  transition: background-color 220ms ease, color 220ms ease;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  background: var(--control-background);
+  border: 1px solid var(--control-border);
+  border-radius: 8px;
+  color: var(--app-text);
+  cursor: pointer;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease,
+    transform 180ms ease;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--app-primary);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+input,
+select {
+  background: var(--field-background);
+  border: 1px solid var(--control-border);
+  border-radius: 8px;
+  color: var(--app-text);
+  padding: 0.55rem 0.7rem;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+input::placeholder {
+  color: var(--app-muted);
+}
+
+progress {
+  accent-color: var(--app-primary);
 }

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
 import Login from './Components/Login';
@@ -5,8 +6,22 @@ import Signup from './Components/Signup';
 import Brainrot from "./Components/Brainrot";
 import Home from './Pages/Home';
 import Session from './Components/Session';
+import { getStoredTheme, getThemeMetaColor, saveTheme } from './Utils/theme';
 
 function App() {
+  const [theme, setTheme] = useState(() => getStoredTheme());
+
+  useEffect(() => {
+    const normalizedTheme = saveTheme(theme);
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+    document.documentElement.dataset.theme = normalizedTheme;
+
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', getThemeMetaColor(normalizedTheme));
+    }
+  }, [theme]);
+
   return (
     <Router>
       <div className="App">
@@ -35,7 +50,10 @@ function App() {
 
         <div>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={<Home selectedTheme={theme} onThemeChange={setTheme} />}
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/brainrot" element={<Brainrot />} />
