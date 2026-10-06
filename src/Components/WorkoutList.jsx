@@ -14,6 +14,11 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   //track frequently used exercises locally or via props
   const [frequentlyUsedIds, setFrequentlyUsedIds] = useState(userFavorites);
 
+  //use states for custom exercises
+  const [customExerciseName, setCustomExerciseName] = useState('');
+  const [variantExerciseId, setVariantExerciseId] = useState('');
+  const [customExercises, setCustomExercises] = useState([]);
+
   useEffect(() => {
     const fetchExercises = async () => {
       try {
@@ -32,7 +37,12 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
         }
 
         const data = await response.json();
-        setExercises(data);
+
+        const savedCustomExercises =
+        JSON.parse(localStorage.getItem('customExercises')) || [];
+        //creates room for custom exercises
+        setCustomExercises(savedCustomExercises);
+        setExercises([...data, ...savedCustomExercises]);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -70,6 +80,42 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
       return matchesMuscle && matchesSearch;
     });
   }, [exercises, viewTab, selectedMuscle, searchTerm, frequentlyUsedIds]);
+  //this is for creating exercises
+  const handleCreateExercise = (e) => {
+    e.preventDefault();
+
+    if (!customExerciseName.trim() || !variantExerciseId) {
+      return;
+    }
+
+    const relatedExercise = exercises.find(
+      (exercise) => exercise.id === variantExerciseId
+    );
+
+    const newExercise = {
+      id: `custom-${Date.now()}`,
+      name: customExerciseName.trim(),
+      bodyPart: relatedExercise?.bodyPart || 'custom',
+      target: relatedExercise?.target || 'custom',
+      equipment: relatedExercise?.equipment || 'custom',
+      variantOf: relatedExercise?.name || '',
+      isCustom: true,
+    };
+
+    const updatedCustomExercises = [...customExercises, newExercise];
+
+    setCustomExercises(updatedCustomExercises);
+    setExercises((prev) => [...prev, newExercise]);
+
+    localStorage.setItem(
+      'customExercises',
+      JSON.stringify(updatedCustomExercises)
+    );
+
+    setCustomExerciseName('');
+    setVariantExerciseId('');
+  };
+
 
   const handleSelect = (exercise) => {
     //dynamically add to frequently used list when selected
@@ -87,6 +133,36 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   return (
     <div className="workout-list-container">
       <h2>Workout Exercises</h2>
+      <form onSubmit={handleCreateExercise} className="custom-exercise-form">
+        
+      <h3>Create Custom Exercise</h3>
+
+      <input
+        type="text"
+        placeholder="Exercise name"
+        value={customExerciseName}
+        onChange={(e) => setCustomExerciseName(e.target.value)}
+      />
+
+      <select
+        value={variantExerciseId}
+        onChange={(e) => setVariantExerciseId(e.target.value)}
+      >
+        <option value="">Select related exercise</option>
+
+        {exercises
+          .filter((exercise) => !exercise.isCustom)
+          .map((exercise) => (
+            <option key={exercise.id} value={exercise.id}>
+              {exercise.name}
+            </option>
+          ))}
+      </select>
+
+      <button type="submit">
+        Create Exercise
+      </button>
+    </form>
 
       {/* View Tabs: All, Frequently Used */}
       <div className="tab-navigation">
