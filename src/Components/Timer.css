@@ -1,0 +1,88 @@
+.timer-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 15%, #021026 0%, #000 65%);
+  color: #eaf6ff;
+}
+
+.timer-card {
+  width: min(100%, 28rem);
+  height: fit-content;
+  padding: 2rem;
+  border: 1px solid rgba(0, 168, 255, 0.55);
+  border-radius: 1rem;
+  background: rgba(3, 15, 32, 0.9);
+  box-shadow: 0 0 30px rgba(0, 168, 255, 0.2);
+  text-align: center;
+}
+
+.timer-card h1 {
+  margin: 0 0 1.5rem;
+  font-size: 1.75rem;
+}
+
+.timer-display {
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(4rem, 18vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 0 18px #00a8ff;
+}
+
+.timer-input-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #b8dfff;
+}
+
+.timer-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem;
+  border: 1px solid #00a8ff;
+  border-radius: 0.4rem;
+  background: #020b18;
+  color: #fff;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.timer-input:focus {
+  outline: 2px solid #00e08a;
+  outline-offset: 2px;
+}
+
+.timer-adjustments,
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.timer-adjustments {
+  margin: 1rem 0;
+}
+
+.timer-card button {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #00a8ff;
+  border-radius: 0.4rem;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.timer-card button:hover {
+  background: rgba(0, 168, 255, 0.2);
+}
+
+.timer-primary-button {
+  background: #00a8ff !important;
+}
