@@ -1,28 +1,118 @@
 .App {
+  background: var(--app-background);
+  color: var(--app-text);
+  min-height: 100vh;
   text-align: center;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease;
 }
 
 .text{
-  color: #fff !important;
-    -webkit-text-stroke:  0.04em #EA1203;
-  text-shadow:
-      0 0 3px #EA1203,
-      0 0 5px #EA1203,
-      0 0 8px #EA1203,
-      0 0 12px #EA1203,
-      0 0 20px #EA1203,
-      0 0 25px #EA1203,
-      0 0 30px #EA1203,
-      0 0 40px #EA1203 !important;
+  color: var(--glow-text) !important;
+  -webkit-text-stroke:  var(--text-stroke-width) var(--text-stroke-color);
+  text-shadow: var(--text-glow) !important;
+  transition:
+    color 220ms ease,
+    text-shadow 220ms ease,
+    -webkit-text-stroke-color 220ms ease;
 }
 
 .button{
-  border: 2px solid #fff !important;
-  box-shadow: 
-    0 0 5px #1CD34D,
-    0 0 10px #1CD34D,
-    0 0 15px #1CD34D,
-    0 0 20px #1CD34D,
-    0 0 30px #1CD34D,
-    inset 0 0 5px rgba(28, 211, 77, 0.3) !important;
+  border: 2px solid var(--button-border) !important;
+  box-shadow: var(--button-glow) !important;
+}
+
+nav {
+  align-items: center;
+  background: var(--nav-background);
+  border-bottom: 1px solid var(--panel-border);
+  box-shadow: 0 10px 28px var(--nav-shadow);
+  box-sizing: border-box;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  padding: 0.85rem 1rem;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+nav a {
+  border-radius: 8px;
+  color: var(--app-muted);
+  font-weight: 700;
+  padding: 0.45rem 0.75rem;
+  text-decoration: none;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+nav a.active,
+nav a:hover {
+  background: var(--nav-link-active);
+  color: var(--app-heading);
+  box-shadow: 0 0 0 1px var(--panel-border);
+}
+
+.workout-list-container,
+.loading-spinner,
+.error-message {
+  color: var(--app-text);
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 2rem;
+}
+
+.tab-navigation,
+.filter-controls,
+.exercise-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.exercise-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 1.25rem;
+}
+
+.exercise-card {
+  background: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--app-text);
+  padding: 1rem;
+  text-align: left;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+.exercise-image {
+  border-radius: 6px;
+  display: block;
+  max-width: 100%;
+}
+
+.badge {
+  background: var(--badge-background);
+  border-radius: 999px;
+  color: var(--badge-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+}
+
+.tab.active,
+.select-button {
+  background: var(--primary-gradient);
+  color: var(--button-text);
 }
