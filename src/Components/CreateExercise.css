@@ -1,0 +1,96 @@
+/* styles for the create exercise form and custom exercise labels (issue #10) */
+.create-exercise {
+  max-width: 420px;
+  margin: 1rem auto;
+  padding: 1rem 1.25rem;
+  border: 2px solid #00ff88;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #00ff88;
+  background: #0b0f1a;
+  color: #fff;
+  text-align: left;
+}
+
+.create-exercise h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.create-exercise label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.create-exercise input,
+.create-exercise select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #111827;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.create-exercise-error {
+  color: #ff4d4d;
+  margin: 0.5rem 0;
+}
+
+.create-exercise-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.create-exercise-buttons button,
+.create-toggle-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #00ff88;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.create-exercise-buttons button.secondary {
+  background: #444;
+  color: #fff;
+}
+
+/* labels shown on custom exercise cards */
+.badge.custom {
+  background: #00ff88;
+  color: #000;
+  padding: 0 0.4rem;
+  border-radius: 4px;
+}
+
+.variant-label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin: 0.25rem 0;
+}
+
+.api-warning {
+  color: #ffcc00;
+  font-size: 0.9rem;
+}
+
+/* space out the labels on each exercise card so they don't run together */
+.exercise-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0.25rem 0;
+}
+
+.exercise-meta .badge {
+  padding: 0 0.4rem;
+  border: 1px solid #888;
+  border-radius: 4px;
+}
