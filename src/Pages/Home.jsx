@@ -3,8 +3,9 @@ import '../App.css';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, getStreak } from '../Utils/streak';
+import ToggleTheme from '../Components/ThemeToggles';
 
-function Home() {
+function Home({ theme, onThemeChange }) {
   const navigate = useNavigate();
   const user = getCurrentUser();
   const streak = user ? getStreak(user) : 0;
@@ -15,6 +16,7 @@ function Home() {
         <h1 className="neon-title text">OSC's Epic Workout App</h1>
         <p className="neon-subtitle text">Lock in. Gain aura. Save money.</p>
         {user && <p className="neon-subtitle text">🔥 {streak} day streak</p>}
+      <ToggleTheme theme={theme} onThemeChange={onThemeChange} />
       </header>
 
       <main className="home-main">
