@@ -6,6 +6,8 @@ import Signup from './Components/Signup';
 import Brainrot from "./Components/Brainrot";
 import Home from './Pages/Home';
 import Session from './Components/Session';
+import ThemeToggle from './Components/ThemeToggle';
+import Nutrition from './Components/Nutrition';
 
 const THEMES = ['dark', 'light', 'colorblind'];
 
@@ -26,7 +28,11 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <ThemeToggle theme={theme} setTheme={setTheme} />
         <nav >
+          <NavLink to="/nutrition">
+            Nutrition
+          </NavLink>
           <NavLink 
             to="/">
             Home
@@ -56,6 +62,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/brainrot" element={<Brainrot />} />
             <Route path="/session" element={<Session />} />
+            <Route path="/nutrition" element={<Nutrition />} />
           </Routes>
         </div>
       </div>

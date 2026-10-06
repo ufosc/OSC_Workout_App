@@ -5,6 +5,11 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+document.documentElement.setAttribute(
+  'data-theme',
+  localStorage.getItem('theme') || 'dark'
+);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
