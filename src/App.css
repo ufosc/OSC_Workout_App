@@ -25,6 +25,8 @@
   background-color:  var(--background-color);
   color: var(--text-color);
   min-height: 100vh;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .text{
@@ -39,6 +41,8 @@
       0 0 25px var(--primary-color),
       0 0 30px var(--primary-color),
       0 0 40px var(--primary-color) !important;
+
+      transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .button{
@@ -50,4 +54,6 @@
     0 0 20px var(--accent-color),
     0 0 30px var(--accent-color),
     inset 0 0 5px var(--accent-color) !important;
+
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
