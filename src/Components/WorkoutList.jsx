@@ -1,10 +1,11 @@
 // generated list of workouts based on relevance to user, muscle group or frequently used
-import React, {useState, useEffect, useMemo} from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
-const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
+const WorkoutList = ({ onSelectExercise, userFavorites = [] }) => {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [matchingExercises, setMatchingExercises] = useState([]);
 
   //filter & Search states
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,6 +14,14 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
 
   //track frequently used exercises locally or via props
   const [frequentlyUsedIds, setFrequentlyUsedIds] = useState(userFavorites);
+
+  //Variables for adding custom exercises
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [customName, setCustomName] = useState('');
+  const [customBodyPart, setCustomBodyPart] = useState('');
+  const [customTarget, setCustomTarget] = useState('');
+  const [customEquipment, setCustomEquipment] = useState('');
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -81,20 +90,27 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
     }
   };
 
-  const handleAddExercise = () => {
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    setCustomName('');
+    setCustomBodyPart('');
+    setCustomTarget('');
+    setCustomEquipment('');
+    setFormError('');
+  }
+
+  const handleAddExerciseSubmission = (event) => {
     //logic to add a custom exercise
+    setIsModalOpen(true);
+    event.preventDefault();
+
     const newExerciseObj = {
       id: Date.now(),
-      name: "Custom",
-      bodyPart: "Custom",
-      target: "Custom",
-      equipment: "Custom",
+      name: customName,
+      bodyPart: customBodyPart,
+      target: customTarget,
+      equipment: customEquipment,
     };
-
-    newExerciseObj.name = prompt ("Enter custom Exercise name: ");
-    newExerciseObj.bodyPart = prompt ("Enter custom Exercise body part: ");
-    newExerciseObj.target = prompt ("Enter custom Exercise target muscle: ");
-    newExerciseObj.equipment = prompt ("Enter custom Exercise equipment: ");
 
     if (!newExerciseObj.name) {
       alert("Please enter a valid exercise name.");
@@ -115,6 +131,33 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
 
     setExercises((prev) => [...prev, newExerciseObj]);
     handleSelect(newExerciseObj);
+    setIsModalOpen(false);
+  }
+
+  function isSimilar(word1, word2) {
+    if (!word1 || !word2) return false;
+    const searchWords = word2.toLowerCase().split(/\s+/).filter(Boolean);
+    const exerciseName_words = word1.toLowerCase().split(/\s+/).filter(Boolean);
+    return searchWords.some((word) => exerciseName_words.includes(word));
+  }
+
+
+  const searchVariants = () => {
+    setMatchingExercises([]);
+    if (!customName) return;
+
+    const matches = exercises.filter((exercise) =>
+      isSimilar(exercise.name.toLowerCase(), customName.toLowerCase())
+    );
+
+    setMatchingExercises(matches);
+  }
+
+  const populateExerciseAdder = (exercise) => {
+    setCustomName(exercise.name);
+    setCustomBodyPart(exercise.bodyPart);
+    setCustomTarget(exercise.target);
+    setCustomEquipment(exercise.equipment);
   }
 
   if (loading) return <div className="loading-spinner">Loading exercise library...</div>;
@@ -168,10 +211,52 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
 
       {/*Exercise Grid Display */}
       <div className="add-exercise">
-        <button type="button" className="add-button" onClick={handleAddExercise}>
+        <button type="button" className="add-button" onClick={handleOpenModal}>
           Add Custom Exercise
         </button>
       </div>
+
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-button" onClick={() => setIsModalOpen(false)}>&times;</span>
+            <form onSubmit={handleAddExerciseSubmission}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
+                <label htmlFor="customName">Exercise Name:</label>
+                <input type="text" id="customName" value={customName} onChange={(e) => setCustomName(e.target.value)} />
+                <button type="button" onClick={() => searchVariants()}>Search Variants</button>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
+              <label htmlFor="customBodyPart">Body Part:</label>
+              <input type="text" id="customBodyPart" value={customBodyPart} onChange={(e) => setCustomBodyPart(e.target.value)} />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
+              <label htmlFor="customTarget">Target Muscle:</label>
+              <input type="text" id="customTarget" value={customTarget} onChange={(e) => setCustomTarget(e.target.value)} />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
+              <label htmlFor="customEquipment">Equipment:</label>
+              <input type="text" id="customEquipment" value={customEquipment} onChange={(e) => setCustomEquipment(e.target.value)} />
+              </div>
+              <button type="submit">Add Exercise</button>
+
+              <div className="matching-exercises" >
+                <p>Variant Exercises</p>
+                {matchingExercises.length === 0 ? (
+                  <p className="no-results">No exercises match your selection.</p>
+                ) : (
+                  matchingExercises.map((exercise) => (
+                    <div key={exercise.id} className="exercise-card">
+                      <p> {exercise.name} </p>
+                      <button type="button" onClick={() => populateExerciseAdder(exercise)}>Select</button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       <div className="exercise-grid">
         {filteredExercises.length === 0 ? (
@@ -189,8 +274,11 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
               )}
               <h3 className="exercise-title">{exercise.name}</h3>
               <div className="exercise-meta">
+                {'Muscle: '}
                 <span className="badge muscle">{exercise.bodyPart}</span>
+                {'\nTarget: '}
                 <span className="badge target">{exercise.target}</span>
+                {'\nEquipment: '}
                 <span className="badge equipment">{exercise.equipment}</span>
               </div>
 
