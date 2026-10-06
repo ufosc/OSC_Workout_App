@@ -1,0 +1,235 @@
+/* Rest timer styles. Colors reuse the neon variables from Home.css (fallbacks keep it working on its own). */
+
+.timer-card {
+  width: 100%;
+  max-width: 440px;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  color: #eaf6ff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 168, 255, 0.35);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 168, 255, 0.15);
+}
+
+.timer-title {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #cfe8ff;
+}
+
+/* ---- countdown ring ---- */
+.timer-ring {
+  position: relative;
+  width: 240px;
+  height: 240px;
+}
+
+.timer-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* start the ring at the top */
+  overflow: visible; /* otherwise the glow is cut off in a square */
+}
+
+.timer-ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 8;
+}
+
+.timer-ring-progress {
+  fill: none;
+  stroke: var(--neon-blue, #00a8ff);
+  stroke-width: 8;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px var(--neon-blue, #00a8ff));
+  transition: stroke-dashoffset 0.25s linear, stroke 0.3s;
+}
+
+.timer-ring.is-complete .timer-ring-progress {
+  stroke: var(--neon-green, #00e08a);
+  filter: drop-shadow(0 0 7px var(--neon-green, #00e08a));
+}
+
+.timer-digits {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums; /* digits keep the same width so the time does not jiggle */
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 168, 255, 0.8);
+}
+
+/* ---- presets ---- */
+.timer-presets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.timer-chip {
+  min-width: 64px;
+  min-height: 44px; /* big enough to tap on a phone */
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 168, 255, 0.4);
+  background: rgba(0, 168, 255, 0.06);
+  color: #eaf6ff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.timer-chip.is-active {
+  background: var(--neon-blue, #00a8ff);
+  border-color: var(--neon-blue, #00a8ff);
+  color: #00121f;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(0, 168, 255, 0.55);
+}
+
+/* ---- custom time and sound rows ---- */
+.timer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.timer-label {
+  font-size: 0.95rem;
+  color: #cfe8ff;
+}
+
+.timer-input,
+.timer-select {
+  min-height: 44px;
+  padding: 0 0.8rem;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.timer-input {
+  width: 160px;
+}
+
+/* ---- buttons ---- */
+.timer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.timer-btn {
+  min-height: 44px;
+  padding: 0 1.3rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.timer-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.timer-btn-primary {
+  min-width: 120px;
+  border: none;
+  background: linear-gradient(90deg, var(--neon-blue, #00a8ff), var(--neon-red, #ff1e4b));
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 22px rgba(0, 168, 255, 0.2);
+}
+
+.timer-btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.timer-btn-stop {
+  border: 1px solid var(--neon-red, #ff1e4b);
+  background: rgba(255, 30, 75, 0.12);
+  box-shadow: 0 0 14px rgba(255, 30, 75, 0.3);
+}
+
+.timer-status {
+  margin: 0;
+  color: var(--neon-green, #00e08a);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 224, 138, 0.6);
+}
+
+/* ---- disabled and keyboard focus ---- */
+.timer-card button:disabled,
+.timer-card input:disabled,
+.timer-card select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.timer-card button:focus-visible,
+.timer-card input:focus-visible,
+.timer-card select:focus-visible {
+  outline: 2px solid var(--neon-green, #00e08a);
+  outline-offset: 2px;
+}
+
+/* ---- phones ---- */
+@media (max-width: 480px) {
+  .timer-card {
+    padding: 1.1rem;
+  }
+
+  .timer-ring {
+    width: 200px;
+    height: 200px;
+  }
+
+  .timer-digits {
+    font-size: 3rem;
+  }
+
+  /* keep all four presets on one row */
+  .timer-presets {
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 0.4rem;
+  }
+
+  .timer-chip {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 0.4rem;
+  }
+
+  .timer-btn-primary {
+    flex: 1 1 100%; /* Start / Pause gets its own full-width row */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timer-ring-progress,
+  .timer-btn {
+    transition: none;
+  }
+}
