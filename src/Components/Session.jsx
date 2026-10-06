@@ -3,8 +3,9 @@ import Timer from "./Timer";
 
 function Session() {
     return(
-        <div style={{textAlign: "center", padding:"2rem" }}>
-            <h1>Workout Session</h1>
+        // home-root and neon-title come from Home.css / App.css, so this page matches the landing page
+        <div className="home-root">
+            <h1 className="neon-title text">Workout Session</h1>
             <Timer/>
         </div>
     );
