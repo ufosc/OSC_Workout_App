@@ -8,10 +8,10 @@ import Home from './Pages/Home';
 import Session from './Components/Session';
 
 function App() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
   return (
     <Router>
-      <div className={`App them-${theme}`}>
+      <div className={`App theme-${theme}`}>
         <nav >
           <NavLink 
             to="/">

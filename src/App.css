@@ -28,26 +28,26 @@
 }
 
 .text{
-  color: #fff !important;
-    -webkit-text-stroke:  0.04em #EA1203;
+  color: var(--text-color) !important;
+    -webkit-text-stroke:  0.04em var(--primary-color);
   text-shadow:
-      0 0 3px #EA1203,
-      0 0 5px #EA1203,
-      0 0 8px #EA1203,
-      0 0 12px #EA1203,
-      0 0 20px #EA1203,
-      0 0 25px #EA1203,
-      0 0 30px #EA1203,
-      0 0 40px #EA1203 !important;
+      0 0 3px var(--primary-color),
+      0 0 5px var(--primary-color),
+      0 0 8px var(--primary-color),
+      0 0 12px var(--primary-color),
+      0 0 20px var(--primary-color),
+      0 0 25px var(--primary-color),
+      0 0 30px var(--primary-color),
+      0 0 40px var(--primary-color) !important;
 }
 
 .button{
-  border: 2px solid #fff !important;
+  border: 2px solid var(--accent-color) !important;
   box-shadow: 
-    0 0 5px #1CD34D,
-    0 0 10px #1CD34D,
-    0 0 15px #1CD34D,
-    0 0 20px #1CD34D,
-    0 0 30px #1CD34D,
-    inset 0 0 5px rgba(28, 211, 77, 0.3) !important;
+    0 0 5px var(--accent-color),
+    0 0 10px var(--accent-color),
+    0 0 15px var(--accent-color),
+    0 0 20px var(--accent-color),
+    0 0 30px var(--accent-color),
+    inset 0 0 5px var(--accent-color) !important;
 }
