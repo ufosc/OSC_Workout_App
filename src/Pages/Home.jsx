@@ -20,7 +20,7 @@ function Home() {
       <main className="home-main">
         {/* Begin Workout - Prominent at the top */}
         <div className="begin-container">
-          <div className="link-card button begin-card">
+          <div className="link-card neon-blue-border begin-card">
             <div className="card-title text ">Begin Workout</div>
             <div className="card-sub text">Primary action</div>
             <button
