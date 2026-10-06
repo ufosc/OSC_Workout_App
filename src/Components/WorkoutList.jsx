@@ -248,7 +248,21 @@ const WorkoutList = ({ onSelectExercise, userFavorites = [] }) => {
                   matchingExercises.map((exercise) => (
                     <div key={exercise.id} className="exercise-card">
                       <p> {exercise.name} </p>
-                      <button type="button" onClick={() => populateExerciseAdder(exercise)}>Select</button>
+                      <div className="Modify">
+                        <button type="button" onClick={() => populateExerciseAdder(exercise)}>Modify This Exercise</button>
+                      </div>
+                      <div className="Proceed">
+                        <button 
+                          type="button" 
+                          onClick={() => {
+                            handleSelect(exercise);
+                            setMatchingExercises([]);
+                            setIsModalOpen(false);
+                          }}
+                        >
+                          Proceed With This Exercise
+                        </button>
+                      </div>
                     </div>
                   ))
                 )}
