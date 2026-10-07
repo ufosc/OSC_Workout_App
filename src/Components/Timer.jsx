@@ -43,6 +43,15 @@ export default function Timer({ initialSeconds = 60, onComplete }) {
   }, [soundType]);
 
   useEffect(() => {
+      return () => {
+          if (activeAudioRef.current) {
+              activeAudioRef.current.pause();
+              activeAudioRef.current = null;
+          }
+      };
+  }, []);
+
+  useEffect(() => {
     if (!isRunning) return undefined;
 
     const id = setInterval(() => {
