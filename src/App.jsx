@@ -47,6 +47,11 @@ function App() {
           >
             Brainrot
           </NavLink>
+          <NavLink
+              to="/session"
+          >
+            Session
+          </NavLink>
         </nav>
 
         <div>
