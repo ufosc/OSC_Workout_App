@@ -1,5 +1,6 @@
 // generated list of workouts based on relevance to user, muscle group or frequently used
 import React, {useState, useEffect, useMemo} from 'react';
+import CreateExercise from './CreateExercise';
 
 const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   const [exercises, setExercises] = useState([]);
@@ -32,9 +33,17 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
         }
 
         const data = await response.json();
-        setExercises(data);
+
+        const customExercises = JSON.parse(localStorage.getItem('customExercises')) || [];
+        
+        setExercises([...data, ...customExercises]);
+
       } catch (err) {
         setError(err.message);
+
+        const customExercises = JSON.parse(localStorage.getItem('customExercises')) || [];
+
+        setExercises(customExercises);
       } finally {
         setLoading(false);
       }
@@ -71,6 +80,13 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
     });
   }, [exercises, viewTab, selectedMuscle, searchTerm, frequentlyUsedIds]);
 
+  const handleExerciseCreated = (newExercise) => {
+  setExercises((prevExercises) => [
+      newExercise,
+      ...prevExercises
+    ]);
+  };
+
   const handleSelect = (exercise) => {
     //dynamically add to frequently used list when selected
     if (!frequentlyUsedIds.includes(exercise.id)) {
@@ -82,11 +98,18 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   };
 
   if (loading) return <div className="loading-spinner">Loading exercise library...</div>;
-  if (error) return <div className="error-message">Error fetching exercises: {error}</div>;
 
   return (
     <div className="workout-list-container">
       <h2>Workout Exercises</h2>
+
+      {error && (
+        <div className="error-message">
+          Exercise library unavailable: {error}
+        </div>
+      )}
+
+      <CreateExercise onExerciseCreated={handleExerciseCreated} />
 
       {/* View Tabs: All, Frequently Used */}
       <div className="tab-navigation">
