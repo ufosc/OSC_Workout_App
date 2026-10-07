@@ -1,0 +1,134 @@
+.session-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.session-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.timer-card {
+  max-width: 420px;
+  margin: 0 auto 2.5rem;
+  padding: 1.5rem;
+  border: 1px solid #2c3e50;
+  border-radius: 14px;
+  background: rgba(8, 18, 32, 0.92);
+}
+
+.workout-list-container {
+  margin-top: 2rem;
+}
+
+.filter-controls,
+.tab-navigation {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-bar,
+.muscle-dropdown {
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #41536a;
+  background: #0d1724;
+  color: white;
+}
+
+.search-bar {
+  flex: 1;
+  min-width: 220px;
+}
+
+.tab,
+.select-button,
+.complete-session-button,
+.remove-exercise-button {
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tab,
+.select-button {
+  background: #1da1f2;
+  color: white;
+}
+
+.tab.active {
+  background: #1479b8;
+}
+
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.exercise-card {
+  padding: 1rem;
+  border: 1px solid #2c3e50;
+  border-radius: 12px;
+  background: rgba(8, 18, 32, 0.92);
+}
+
+.exercise-title {
+  margin-top: 0;
+}
+
+.exercise-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 1rem;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: #1d2b3a;
+  font-size: 0.8rem;
+}
+
+.current-workout {
+  margin-top: 2.5rem;
+}
+
+.selected-exercise-card {
+  padding: 1rem;
+  border: 1px solid #2c3e50;
+  border-radius: 12px;
+  background: rgba(8, 18, 32, 0.92);
+  margin-bottom: 1rem;
+}
+
+.selected-exercise-inputs {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.selected-exercise-inputs input {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #41536a;
+  background: #0d1724;
+  color: white;
+}
+
+.remove-exercise-button {
+  background: #7a263a;
+  color: white;
+}
+
+.complete-session-button {
+  margin-top: 1rem;
+  background: #1da1f2;
+  color: white;
+  font-size: 1rem;
+}

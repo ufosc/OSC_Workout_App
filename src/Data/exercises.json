@@ -1,0 +1,128 @@
+[
+  {
+    "id": "bench-press",
+    "name": "Bench Press",
+    "bodyPart": "chest",
+    "target": "pectorals",
+    "equipment": "barbell"
+  },
+  {
+    "id": "incline-dumbbell-press",
+    "name": "Incline Dumbbell Press",
+    "bodyPart": "chest",
+    "target": "upper chest",
+    "equipment": "dumbbell"
+  },
+  {
+    "id": "push-up",
+    "name": "Push-Up",
+    "bodyPart": "chest",
+    "target": "pectorals",
+    "equipment": "body weight"
+  },
+  {
+    "id": "pull-up",
+    "name": "Pull-Up",
+    "bodyPart": "back",
+    "target": "lats",
+    "equipment": "body weight"
+  },
+  {
+    "id": "lat-pulldown",
+    "name": "Lat Pulldown",
+    "bodyPart": "back",
+    "target": "lats",
+    "equipment": "cable"
+  },
+  {
+    "id": "barbell-row",
+    "name": "Barbell Row",
+    "bodyPart": "back",
+    "target": "upper back",
+    "equipment": "barbell"
+  },
+  {
+    "id": "overhead-press",
+    "name": "Overhead Press",
+    "bodyPart": "shoulders",
+    "target": "deltoids",
+    "equipment": "barbell"
+  },
+  {
+    "id": "lateral-raise",
+    "name": "Lateral Raise",
+    "bodyPart": "shoulders",
+    "target": "side delts",
+    "equipment": "dumbbell"
+  },
+  {
+    "id": "barbell-curl",
+    "name": "Barbell Curl",
+    "bodyPart": "arms",
+    "target": "biceps",
+    "equipment": "barbell"
+  },
+  {
+    "id": "hammer-curl",
+    "name": "Hammer Curl",
+    "bodyPart": "arms",
+    "target": "biceps",
+    "equipment": "dumbbell"
+  },
+  {
+    "id": "tricep-pushdown",
+    "name": "Tricep Pushdown",
+    "bodyPart": "arms",
+    "target": "triceps",
+    "equipment": "cable"
+  },
+  {
+    "id": "squat",
+    "name": "Barbell Squat",
+    "bodyPart": "legs",
+    "target": "quadriceps",
+    "equipment": "barbell"
+  },
+  {
+    "id": "leg-press",
+    "name": "Leg Press",
+    "bodyPart": "legs",
+    "target": "quadriceps",
+    "equipment": "machine"
+  },
+  {
+    "id": "romanian-deadlift",
+    "name": "Romanian Deadlift",
+    "bodyPart": "legs",
+    "target": "hamstrings",
+    "equipment": "barbell"
+  },
+  {
+    "id": "leg-curl",
+    "name": "Leg Curl",
+    "bodyPart": "legs",
+    "target": "hamstrings",
+    "equipment": "machine"
+  },
+  {
+    "id": "calf-raise",
+    "name": "Calf Raise",
+    "bodyPart": "legs",
+    "target": "calves",
+    "equipment": "machine"
+  },
+  {
+    "id": "plank",
+    "name": "Plank",
+    "bodyPart": "core",
+    "target": "abdominals",
+    "equipment": "body weight"
+  },
+  {
+    "id": "ab-rollout",
+    "name": "Ab Rollout",
+    "bodyPart": "core",
+    "target": "abdominals",
+    "equipment": "ab wheel"
+  }
+]
