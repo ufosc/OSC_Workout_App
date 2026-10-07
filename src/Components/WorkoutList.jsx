@@ -1,5 +1,6 @@
 // generated list of workouts based on relevance to user, muscle group or frequently used
 import React, {useState, useEffect, useMemo} from 'react';
+import exerciseData from '../Data/exercises.json';
 
 const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   const [exercises, setExercises] = useState([]);
@@ -14,34 +15,39 @@ const WorkoutList = ({onSelectExercise, userFavorites = []}) => {
   //track frequently used exercises locally or via props
   const [frequentlyUsedIds, setFrequentlyUsedIds] = useState(userFavorites);
 
+  // useEffect(() => {
+  //   const fetchExercises = async () => {
+  //     try {
+  //       setLoading(true);
+  //       // ExerciseDB API via RapidAPI or local Kaggle dataset JSON
+  //       const response = await fetch('https://exercisedb.p.rapidapi.com/exercises?limit=100', {
+  //         method: 'GET',
+  //         headers: {
+  //           'X-RapidAPI-Key': process.env.REACT_APP_RAPIDAPI_KEY || '',
+  //           'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
+  //         },
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+
+  //       const data = await response.json();
+  //       setExercises(data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchExercises();
+  // }, []);
+
   useEffect(() => {
-    const fetchExercises = async () => {
-      try {
-        setLoading(true);
-        // ExerciseDB API via RapidAPI or local Kaggle dataset JSON
-        const response = await fetch('https://exercisedb.p.rapidapi.com/exercises?limit=100', {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': process.env.REACT_APP_RAPIDAPI_KEY || '',
-            'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setExercises(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchExercises();
-  }, []);
+  setExercises(exerciseData);
+  setLoading(false);
+}, []);
 
   //Extract unique muscle groups/body parts dynamically
   const muscleGroups = useMemo(() => {

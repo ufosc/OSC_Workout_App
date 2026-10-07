@@ -99,3 +99,62 @@
     outline-offset: 2px;
   }
 .begin-button.text {color: #fff !important;}
+
+/* login page */
+
+.auth-root {
+    max-width: 420px;
+    margin: 80px auto;
+    padding: 32px;
+    border: 1px solid #2a3b50;
+    border-radius: 14px;
+    background: rgba(8, 18, 32, 0.92);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .auth-root h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 2rem;
+  }
+
+  .auth-root form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .auth-root input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #41536a;
+    border-radius: 8px;
+    background: #0d1724;
+    color: white;
+    font-size: 1rem;
+  }
+
+  .auth-root input:focus {
+    outline: none;
+    border-color: #1da1f2;
+  }
+
+  .auth-begin-button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #1da1f2;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .auth-begin-button:hover {
+    opacity: 0.9;
+  }
+
+  .auth-root p {
+    margin: 10px 0;
+    color: #d8e2ef;
+  }

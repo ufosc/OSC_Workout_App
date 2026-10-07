@@ -56,7 +56,8 @@ function Login() {
 
     return (
         <div className="auth-root">
-            <h2>Login</h2>
+            <h2>Welcome Back</h2>
+            <p>Enter your local profile name to continue.</p>
             <form onSubmit={handleLogin}>
                 <input
                     type="text"
