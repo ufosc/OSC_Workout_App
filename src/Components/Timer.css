@@ -1,0 +1,231 @@
+.rest-timer {
+  width: min(100%, 30rem);
+  margin: 1.5rem auto;
+  padding: clamp(1.25rem, 5vw, 2rem);
+  box-sizing: border-box;
+  color: var(--text);
+  background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--surface) 45%, transparent));
+  border: 1px solid var(--surface-border);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.25rem 3rem var(--shadow);
+  text-align: left;
+}
+
+.rest-timer__heading,
+.rest-timer__actions,
+.rest-timer__presets,
+.rest-timer__custom-controls {
+  display: flex;
+  align-items: center;
+}
+
+.rest-timer__heading {
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rest-timer h2,
+.rest-timer p {
+  margin: 0;
+}
+
+.rest-timer h2 {
+  color: var(--text-heading);
+  font-size: 1.5rem;
+}
+
+.rest-timer__eyebrow {
+  margin-bottom: 0.25rem !important;
+  color: var(--accent-1);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rest-timer__state {
+  padding: 0.35rem 0.7rem;
+  color: var(--text-soft);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.rest-timer__state.is-running {
+  color: var(--on-accent);
+  background: var(--accent-3);
+  border-color: var(--accent-3);
+}
+
+.rest-timer__display {
+  margin: 1.25rem 0 0.5rem;
+  color: var(--text-heading);
+  font-size: clamp(3.75rem, 18vw, 6rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-align: center;
+  text-shadow: 0 0 1.5rem color-mix(in srgb, var(--accent-1) 45%, transparent);
+}
+
+.rest-timer__progress {
+  width: 100%;
+  height: 0.5rem;
+  overflow: hidden;
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.rest-timer__progress::-webkit-progress-bar {
+  background: var(--surface);
+  border-radius: 999px;
+}
+
+.rest-timer__progress::-webkit-progress-value {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+  border-radius: 999px;
+}
+
+.rest-timer__progress::-moz-progress-bar {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+  border-radius: 999px;
+}
+
+.rest-timer__presets {
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.rest-timer button,
+.rest-timer input,
+.rest-timer select {
+  box-sizing: border-box;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 0.65rem;
+  font: inherit;
+}
+
+.rest-timer button {
+  min-height: 2.6rem;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.rest-timer button:hover:not(:disabled) {
+  border-color: var(--accent-1);
+  transform: translateY(-1px);
+}
+
+.rest-timer button:focus-visible,
+.rest-timer input:focus-visible,
+.rest-timer select:focus-visible {
+  outline: 2px solid var(--accent-1);
+  outline-offset: 2px;
+}
+
+.rest-timer button:disabled,
+.rest-timer input:disabled,
+.rest-timer select:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.rest-timer__preset {
+  flex: 1;
+}
+
+.rest-timer__preset[aria-pressed="true"] {
+  color: var(--on-accent);
+  background: var(--accent-1);
+  border-color: var(--accent-1);
+}
+
+.rest-timer__custom,
+.rest-timer__sound {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.rest-timer label {
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.rest-timer__custom-controls {
+  gap: 0.5rem;
+}
+
+.rest-timer input,
+.rest-timer select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.75rem;
+}
+
+.rest-timer select option {
+  color: #111;
+}
+
+.rest-timer__custom input {
+  flex: 1;
+}
+
+.rest-timer__error {
+  color: var(--accent-2);
+  font-size: 0.8rem;
+}
+
+.rest-timer__actions {
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.rest-timer__actions button {
+  flex: 1;
+}
+
+.rest-timer__actions .rest-timer__primary {
+  color: var(--on-accent);
+  background: var(--accent-1);
+  border-color: var(--accent-1);
+}
+
+.rest-timer__message {
+  min-height: 1.25rem;
+  margin-top: 1rem !important;
+  color: var(--accent-3);
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 30rem) {
+  .rest-timer__presets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rest-timer__actions {
+    flex-wrap: wrap;
+  }
+
+  .rest-timer__actions button {
+    flex-basis: calc(50% - 0.65rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rest-timer button {
+    transition: none;
+  }
+}
