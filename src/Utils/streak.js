@@ -1,4 +1,4 @@
-// login streak for each user, saved in localStorage until the app has a backend
+// workout streak for each user, saved in localStorage until the app has a backend
 
 const CURRENT_USER_KEY = 'osc-current-user';
 const STREAK_KEY_PREFIX = 'osc-streak:';
@@ -51,13 +51,13 @@ function loadStreakData(username) {
 // missed exactly one day but has a freeze -> uses the freeze, streak + 1
 // missed more than that (or first login ever) -> streak restarts at 1
 // logging in again on the same day -> no change
-export function recordLogin(username, now = new Date()) {
+export function recordWorkout(username, now = new Date()) {
     const data = loadStreakData(username);
     const today = toDayKey(now);
     const gap = data.lastEntryDate ? daysBetween(data.lastEntryDate, today) : null;
 
     if (gap !== null && gap <= 0) {
-        return data;
+        return { ...data, alreadyCounted: true };
     }
 
     const usedFreeze = gap === 2 && data.freezes > 0;
@@ -105,7 +105,7 @@ export function getMilestone(streak) {
     return hit ? hit.message : null;
 }
 
-export function getLoginEntries(username) {
+export function getWorkoutEntries(username) {
     return loadStreakData(username).entries;
 }
 

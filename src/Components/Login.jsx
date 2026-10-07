@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../Pages/Home.css';
 import {
-    recordLogin,
     getStreak,
     getBestStreak,
     getFreezes,
@@ -14,16 +13,12 @@ import {
 function Login() {
     const [user, setUser] = useState(getCurrentUser());
     const [username, setUsername] = useState('');
-    const [usedFreeze, setUsedFreeze] = useState(false);
 
     const handleLogin = (event) => {
         event.preventDefault();
         const name = username.trim();
         if (!name) return;
 
-        // logging in records today's entry and bumps the streak
-        const result = recordLogin(name);
-        setUsedFreeze(Boolean(result.usedFreeze));
         setCurrentUser(name);
         setUser(name);
         setUsername('');
@@ -32,7 +27,6 @@ function Login() {
     const handleLogout = () => {
         clearCurrentUser();
         setUser(null);
-        setUsedFreeze(false);
     };
 
     if (user) {
@@ -44,10 +38,9 @@ function Login() {
         return (
             <div className="auth-root">
                 <h2>Welcome, {user}</h2>
-                <p>🔥 Login streak: {streak} {streak === 1 ? 'day' : 'days'}</p>
+                <p>🔥 Workout streak: {streak} {streak === 1 ? 'day' : 'days'}</p>
                 <p>🏆 Best streak: {best} {best === 1 ? 'day' : 'days'}</p>
                 <p>❄️ Freezes: {freezes}</p>
-                {usedFreeze && <p>You missed a day, so a freeze saved your streak.</p>}
                 {milestone && <p>{milestone}</p>}
                 <button className="auth-begin-button" onClick={handleLogout}>Log out</button>
             </div>
