@@ -7,6 +7,7 @@ import Brainrot from "./Components/Brainrot";
 import Home from './Pages/Home';
 import Session from './Components/Session';
 import Nutrition from './Components/Nutrition';
+import PastSessions from './Pages/PastSessions';
 
 const THEMES = ['dark', 'light', 'colorblind'];
 
@@ -51,6 +52,9 @@ function App() {
           <NavLink to="/nutrition">
             Nutrition
           </NavLink>
+          <NavLink to="/history">
+            History
+          </NavLink>
         </nav>
 
         <div>
@@ -61,6 +65,7 @@ function App() {
             <Route path="/brainrot" element={<Brainrot />} />
             <Route path="/session" element={<Session />} />
             <Route path="/nutrition" element={<Nutrition />} />
+            <Route path="/history" element={<PastSessions />} />
           </Routes>
         </div>
       </div>

@@ -38,7 +38,7 @@ function Home({ theme, setTheme }) {
         <section className="links-panel">
           <h2 className="panel-title text">Choices</h2>
           <div className="choices-column">
-            <button className="link-card neon-red small-link" onClick={() => {/* TODO: Implement previous workout functionality */}}>
+            <button className="link-card neon-red small-link" onClick={() => navigate('/history')}>
               <div className="card-title text">Previous Workout</div>
               <div className="card-sub text">View stats</div>
             </button>
