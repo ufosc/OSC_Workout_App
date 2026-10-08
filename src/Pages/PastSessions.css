@@ -1,0 +1,217 @@
+.history-main {
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.history-calendar,
+.history-details {
+  align-items: stretch;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.calendar-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-heading);
+}
+
+.calendar-nav {
+  background: transparent;
+  color: var(--text-heading);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.calendar-nav:hover,
+.calendar-nav:focus-visible {
+  border-color: var(--accent-1);
+  outline: none;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+}
+
+.calendar-weekday {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  text-align: center;
+  padding-bottom: 0.25rem;
+}
+
+.calendar-cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.calendar-cell.empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+.calendar-cell.today .calendar-day-number {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.calendar-cell.has-workout {
+  border-color: var(--accent-3);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-3) 35%, transparent);
+}
+
+.calendar-cell.selected {
+  border-color: var(--accent-1);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent-1) 60%, transparent);
+}
+
+.calendar-cell:focus-visible {
+  outline: 2px solid var(--accent-1);
+  outline-offset: 2px;
+}
+
+.calendar-dot {
+  position: absolute;
+  bottom: 15%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-3);
+}
+
+.history-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  color: var(--text-soft);
+  margin: 0.5rem 0;
+}
+
+.history-secondary-button {
+  background: transparent;
+  color: var(--text-soft);
+  border: 1px dashed var(--surface-border);
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+}
+
+.session-card {
+  border: 1px solid var(--surface-border);
+  border-left: 3px solid var(--accent-1);
+  border-radius: 10px;
+  padding: 0.9rem;
+  background: var(--surface);
+  text-align: left;
+}
+
+.session-card + .session-card {
+  margin-top: 0.75rem;
+}
+
+.session-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.session-name {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--text-heading);
+}
+
+.session-meta {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+.session-delete {
+  background: transparent;
+  color: var(--accent-2);
+  border: 1px solid color-mix(in srgb, var(--accent-2) 50%, transparent);
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.session-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.session-stats span {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--surface-border);
+  color: var(--text-soft);
+}
+
+.session-exercises {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.session-exercises li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.exercise-name {
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.exercise-sets {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+@media (max-width: 720px) {
+  .history-main {
+    grid-template-columns: 1fr;
+  }
+}
